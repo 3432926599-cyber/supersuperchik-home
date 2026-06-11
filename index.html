@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupersupErChik</title>
+  <meta name="description" content="SupersupErChik — Full-Stack Developer & Frontend Engineer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=block" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #0d0d0d;
+      --bg-alt:    #121212;
+      --text:      #b0b0b0;
+      --text-dim:  #5c5c5c;
+      --text-hi:   #e8e8e8;
+      --green:     #4faf4f;
+      --green-dim: #2a5a2a;
+      --amber:     #d7af5f;
+      --amber-dim: #7a652f;
+      --blue:      #5f87af;
+      --cyan:      #5fafaf;
+      --red:       #af5f5f;
+      --border:    #1f1f1f;
+
+      --font-display: 'Syne', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --sz-massive:  clamp(3.5rem, 11vw, 9rem);
+      --sz-huge:     clamp(2rem, 5vw, 4rem);
+      --sz-big:      clamp(1.2rem, 2.2vw, 1.7rem);
+      --sz-md:       0.95rem;
+      --sz-sm:       0.85rem;
+      --sz-xs:       0.72rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-mono);
+      font-size: var(--sz-md);
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* scanline */
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 2rem; right: 2rem; z-index: 100;
+      display: flex; gap: 2rem;
+      font-size: var(--sz-xs); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .nav a {
+      color: var(--text-dim); text-decoration: none; transition: color 0.3s;
+      position: relative;
+    }
+    .nav a:hover { color: var(--green); }
+    .nav a::after {
+      content: ''; display: block; width: 0; height: 1px;
+      background: var(--green); transition: width 0.3s;
+    }
+    .nav a:hover::after { width: 100%; }
+
+    /* ===== MAIN PADDING ===== */
+    .page { padding: 0 2rem; }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100dvh;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .hero-left {
+      flex: 0 1 auto;
+      max-width: 48%;
+    }
+
+    .hero-tag {
+      font-size: var(--sz-xs); color: var(--amber);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+      font-weight: 800;
+      color: var(--text-hi);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+    }
+    .hero-name .line {
+      display: block;
+    }
+    .hero-name .hl {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .hero-right {
+      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 1rem;
+    }
+
+    .hero-avatar-wrap {
+      width: clamp(220px, 30vw, 420px);
+      border: 1px solid var(--green-dim);
+      padding: 5px;
+      background: var(--bg-alt);
+    }
+    .hero-avatar-wrap img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.05) brightness(0.88);
+      transition: filter 0.6s;
+    }
+    .hero-avatar-wrap img:hover {
+      filter: grayscale(60%) contrast(1) brightness(0.92);
+    }
+
+    .hero-stats {
+      display: flex; gap: 1.5rem;
+      font-size: var(--sz-sm); color: var(--text-dim);
+    }
+    .hero-stats span { color: var(--green); font-weight: 700; }
+
+    /* ===== SECTION ===== */
+    .section { padding: 4rem 0; }
+
+    /* ===== LABELED BLOCK ===== */
+    .block-grid {
+      display: grid; grid-template-columns: 100px 1fr; gap: 1.5rem;
+      align-items: start;
+    }
+    .block-num {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 800; color: var(--border);
+      line-height: 0.85;
+      position: sticky; top: 2rem;
+    }
+
+    /* ===== ALTERNATING LAYOUT: .alt sections flip to number-right ===== */
+    .alt .block-grid {
+      grid-template-columns: 1fr 100px;
+    }
+    .alt .block-grid > .block-num {
+      grid-column: 2;
+      text-align: right;
+    }
+    .alt .block-grid > *:not(.block-num) {
+      grid-column: 1;
+    }
+    /* skills in alt section: push entire block right toward the number */
+    .alt .skills-block {
+      justify-self: end;
+    }
+    .alt .skills-scatter .tag {
+      margin: 0 !important;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--sz-big);
+      font-weight: 700;
+      color: var(--text-hi);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-text {
+      font-family: var(--font-display);
+      font-size: var(--sz-big);
+      font-weight: 500;
+      color: var(--text-hi);
+      line-height: 1.45;
+      max-width: 580px;
+    }
+    .about-text em { font-style: normal; color: var(--amber); }
+    .about-text .note {
+      display: block; margin-top: 1.5rem;
+      font-family: var(--font-mono); font-size: var(--sz-sm);
+      color: var(--text-dim); font-weight: 400; line-height: 1.6;
+    }
+
+    /* ===== SKILLS — scattered ===== */
+    .skills-scatter {
+      display: flex; flex-wrap: wrap;
+      gap: 0.6rem;
+      max-width: 680px;
+    }
+    .skills-scatter .tag {
+      font-family: var(--font-mono);
+      font-size: var(--sz-md);
+      padding: 0.6rem 1.3rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      letter-spacing: 0.04em;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .skills-scatter .tag:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-2px);
+    }
+    /* staggered offsets */
+    .skills-scatter .tag:nth-child(1)  { margin-top: 0;     margin-left: 0; }
+    .skills-scatter .tag:nth-child(2)  { margin-top: 12px;   margin-left: 35px; }
+    .skills-scatter .tag:nth-child(3)  { margin-top: -6px;   margin-left: 10px; }
+    .skills-scatter .tag:nth-child(4)  { margin-top: 18px;   margin-left: -10px; }
+    .skills-scatter .tag:nth-child(5)  { margin-top: -10px;  margin-left: 45px; }
+    .skills-scatter .tag:nth-child(6)  { margin-top: 22px;   margin-left: -25px; }
+    .skills-scatter .tag:nth-child(7)  { margin-top: -14px;  margin-left: 60px; }
+    .skills-scatter .tag:nth-child(8)  { margin-top: 10px;   margin-left: 0; }
+    .skills-scatter .tag:nth-child(9)  { margin-top: -18px;  margin-left: 75px; }
+    .skills-scatter .tag:nth-child(10) { margin-top: 28px;   margin-left: -35px; }
+    .skills-scatter .tag:nth-child(11) { margin-top: -8px;   margin-left: 50px; }
+    .skills-scatter .tag:nth-child(12) { margin-top: 14px;   margin-left: 20px; }
+
+    /* ===== PROJECTS ===== */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .proj-card {
+      border: 1px solid var(--border);
+      transition: border-color 0.4s, transform 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .proj-card:hover {
+      border-color: var(--green-dim);
+      transform: translateY(-4px);
+    }
+
+    /* Project image area */
+    .proj-img {
+      width: 100%;
+      background: var(--bg-alt);
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 16 / 10;
+    }
+    .proj-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    .proj-card:hover .proj-img img { transform: scale(1.04); }
+    .proj-img img.not-loaded { opacity: 0.15; }
+
+    /* Placeholder hint */
+    .proj-img-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .proj-img-placeholder span {
+      font-family: var(--font-mono);
+      font-size: var(--sz-xs);
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      border: 1px dashed var(--border);
+      padding: 0.4rem 1rem;
+    }
+
+    .proj-body {
+      padding: 1.2rem;
+      display: flex; flex-direction: column;
+      flex: 1;
+    }
+
+    .proj-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem; font-weight: 800; color: var(--border);
+      line-height: 1; margin-bottom: 0.2rem;
+    }
+    .proj-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700; color: var(--text-hi);
+      margin-bottom: 0.4rem;
+    }
+    .proj-desc {
+      color: var(--text-dim); font-size: var(--sz-sm); line-height: 1.5;
+      margin-bottom: 0.8rem;
+      flex: 1;
+    }
+    .proj-tech {
+      display: flex; flex-wrap: wrap; gap: 0.3rem;
+      margin-top: auto;
+    }
+    .proj-tech span {
+      font-size: var(--sz-xs); color: var(--text-dim); letter-spacing: 0.04em;
+    }
+    .proj-tech span::before { content: '['; color: var(--border); }
+    .proj-tech span::after  { content: ']'; color: var(--border); }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+    .contact-big {
+      font-family: var(--font-display);
+      font-size: var(--sz-huge); font-weight: 700;
+      color: var(--text-hi); line-height: 1.1;
+    }
+    .contact-big span { color: var(--green); }
+    .contact-lines {
+      display: flex; flex-direction: column; gap: 0;
+      padding-top: 0.5rem;
+    }
+    .contact-row {
+      display: flex; justify-content: space-between;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .contact-row:hover { border-color: var(--green-dim); }
+    .contact-row .k {
+      font-size: var(--sz-xs); color: var(--amber);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .contact-row .v {
+      color: var(--text); font-size: var(--sz-sm);
+    }
+    .contact-row .v a {
+      color: var(--cyan); text-decoration: none; transition: color 0.3s;
+    }
+    .contact-row .v a:hover { color: var(--text-hi); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 2.5rem 0; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      font-size: var(--sz-xs); color: var(--text-dim); letter-spacing: 0.05em;
+    }
+    .corner-bracket {
+      position: fixed; bottom: 2rem; left: 2rem; z-index: 0;
+      font-family: var(--font-mono); font-size: var(--sz-xs);
+      color: var(--border); user-select: none; pointer-events: none;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE — Tablet ===== */
+    @media (max-width: 900px) {
+      .section { padding: 3rem 0; }
+      .hero { flex-direction: column-reverse; min-height: auto; gap: 1.5rem; padding-top: 5rem; align-items: flex-start; }
+      .hero-left { max-width: 100%; }
+      .hero-right { align-items: flex-start; }
+      .hero-avatar-wrap { width: 200px; }
+      .hero-stats { gap: 1rem; }
+      .block-grid,
+      .alt .block-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+      .block-num,
+      .alt .block-grid > .block-num { grid-column: 1; position: static; text-align: left; font-size: 1.5rem; }
+      .alt .block-grid > *:not(.block-num) { grid-column: 1; }
+      .alt .skills-block { justify-self: start; }
+      .proj-grid { grid-template-columns: repeat(2, 1fr); }
+      .proj-img { aspect-ratio: 4 / 3; }
+      .proj-body { padding: 1rem; }
+      .proj-num { font-size: 1.8rem; }
+      .proj-name { font-size: 1rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .contact-big { font-size: 1.8rem; }
+      .skills-scatter .tag { margin: 0 !important; }
+      .about-text { font-size: 1.1rem; }
+      .corner-bracket { display: none; }
+    }
+
+    /* ===== RESPONSIVE — Mobile ===== */
+    @media (max-width: 500px) {
+      .page { padding: 0 1rem; }
+      .section { padding: 2.5rem 0; }
+      .hero { padding-top: 4rem; gap: 0; flex-direction: row; flex-wrap: wrap; align-items: center; }
+      .hero-right { flex-direction: row; align-items: center; gap: 0; order: -1; flex-shrink: 0; }
+      .hero-left { flex: 1; min-width: 0; max-width: 100%; padding-left: 0.8rem; }
+      .hero-avatar-wrap { width: 56px; padding: 2px; flex-shrink: 0; }
+      .hero-name { font-size: 1.7rem; }
+      .hero-tag { font-size: 0.6rem; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+      .hero-stats { font-size: 0.7rem; gap: 0.8rem; width: 100%; margin-top: 0.8rem; order: 1; justify-content: flex-start; }
+      .nav { top: 0.8rem; right: 0.8rem; gap: 0.8rem; font-size: 0.6rem; }
+      .block-num,
+      .alt .block-grid > .block-num { font-size: 1.2rem; }
+      .about-text { font-size: 1rem; line-height: 1.5; }
+      .about-text .note { font-size: 0.78rem; }
+      .section-title { font-size: 1.2rem; }
+      .skills-scatter .tag { font-size: 0.82rem; padding: 0.4rem 0.8rem; }
+      .proj-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .proj-img { aspect-ratio: 16 / 9; }
+      .proj-body { padding: 0.9rem; }
+      .proj-num { font-size: 1.5rem; }
+      .proj-name { font-size: 1rem; }
+      .proj-desc { font-size: 0.78rem; }
+      .proj-tech span { font-size: 0.65rem; }
+      .contact-big { font-size: 1.5rem; }
+      .contact-row { padding: 0.7rem 0; }
+      .contact-row .v { font-size: 0.8rem; }
+      .footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 0; text-align: center; }
+      .block-grid,
+      .alt .block-grid { gap: 0.4rem; }
+    }
+
+    ::selection { background: var(--green-dim); color: var(--bg); }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="corner-bracket">{ /* SupersupErChik */ }</div>
+
+  <div class="page">
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+      <div class="hero-left reveal">
+        <div class="hero-tag">Full-Stack Developer &amp; Frontend Engineer</div>
+        <h1 class="hero-name">
+          <span class="line">Supersup</span>
+          <span class="line"><span class="hl">Er</span>Chik</span>
+        </h1>
+      </div>
+
+      <div class="hero-right reveal">
+        <div class="hero-avatar-wrap">
+          <img src="images/ip.png" alt="SupersupErChik" width="380" height="380">
+        </div>
+        <div class="hero-stats">
+          <span>12+</span> 技术栈
+          <span>3</span> 项目
+          <span>∞</span> 好奇心
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section">
+      <div class="block-grid">
+        <div class="block-num reveal">/01</div>
+        <div class="about-text reveal">
+          代码是笔，<em>Web 是纸</em>。<br>
+          我专注于构建性能极致、体验细腻的数字产品——在逻辑的严谨与视觉的张力之间，找到那个让人<em>心动的平衡点</em>。
+          <span class="note">独立开发者心态。追求每一行代码的优雅，每一个像素的精准。不满足于"能用"，追求用得舒服。</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section alt">
+      <div class="block-grid">
+        <div class="block-num reveal">/02</div>
+        <div class="skills-block">
+          <h2 class="section-title reveal">技术栈</h2>
+          <div class="skills-scatter reveal">
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Vue 3</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Vite</span>
+          <span class="tag">Python</span>
+          <span class="tag">Flask</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Pinia</span>
+          <span class="tag">Element Plus</span>
+          <span class="tag">Tailwind</span>
+          <span class="tag">Canvas 2D</span>
+          <span class="tag">CloudBase</span>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="work" class="section">
+      <div class="block-grid" style="margin-bottom:2rem;">
+        <div class="block-num reveal">/03</div>
+        <div></div>
+      </div>
+
+      <div class="proj-grid reveal">
+
+        <!-- Project 1: Vue Admin -->
+        <article class="proj-card">
+          <div class="proj-img">
+            <img
+              src="images/projects/vue-admin.png"
+              alt="Vue Admin 企业级后台管理系统"
+              loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              onload="this.classList.remove('not-loaded');this.nextElementSibling.style.display='none'"
+              class="not-loaded"
+            >
+            <div class="proj-img-placeholder">
+              <span>📷 Vue Admin 截图</span>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-num">01</div>
+            <h3 class="proj-name">Vue Admin</h3>
+            <p class="proj-desc">企业级后台管理系统。从权限架构到组件原子化，构建可扩展、可维护的中台基座。</p>
+            <div class="proj-tech">
+              <span>Vue 3</span><span>TypeScript</span><span>Vite</span><span>Pinia</span><span>Element Plus</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: E-Card -->
+        <article class="proj-card">
+          <div class="proj-img">
+            <img
+              src="images/projects/e-card.png"
+              alt="E-Card 不对称卡牌对战小程序"
+              loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              onload="this.classList.remove('not-loaded');this.nextElementSibling.style.display='none'"
+              class="not-loaded"
+            >
+            <div class="proj-img-placeholder">
+              <span>📷 E-Card 截图</span>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-num">02</div>
+            <h3 class="proj-name">E-Card</h3>
+            <p class="proj-desc">不对称卡牌对战小程序。独立设计与开发，打破对称规则——每一局都是新的博弈维度。</p>
+            <div class="proj-tech">
+              <span>微信小游戏</span><span>Canvas 2D</span><span>CloudBase</span><span>Vibe Coding</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: AiChess -->
+        <article class="proj-card">
+          <div class="proj-img">
+            <img
+              src="images/projects/aichess.png"
+              alt="AiChess 人机对战五子棋"
+              loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              onload="this.classList.remove('not-loaded');this.nextElementSibling.style.display='none'"
+              class="not-loaded"
+            >
+            <div class="proj-img-placeholder">
+              <span>📷 AiChess 截图</span>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-num">03</div>
+            <h3 class="proj-name">AiChess</h3>
+            <p class="proj-desc">人机对战五子棋游戏。Python Flask 驱动的 Web REST API 后端，搭配简洁前端界面——人与 AI 的棋盘博弈。</p>
+            <div class="proj-tech">
+              <span>Python</span><span>Flask</span><span>REST API</span><span>Web</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section alt">
+      <div class="block-grid" style="margin-bottom:2rem;">
+        <div class="block-num reveal">/04</div>
+        <div></div>
+      </div>
+
+      <div class="contact-grid reveal">
+        <h2 class="contact-big">
+          留下<span>痕迹</span>。<br>
+          每段对话都是<br>
+          新的可能。
+        </h2>
+
+        <div class="contact-lines">
+          <div class="contact-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
+          <div class="contact-row"><span class="k">Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
+          <div class="contact-row"><span class="k">WeChat</span><span class="v">x19xixi</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 SupersupErChik</span>
+      <span style="color:var(--green);">●</span>
+    </footer>
+
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.nav a').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
