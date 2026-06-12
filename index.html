@@ -510,107 +510,6 @@
     }
     .proj-row:hover .proj-desc { color: var(--text-mid); }
 
-    /* ===== PROJECT CARDS (03 模块) ===== */
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .proj-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.4rem;
-      border: 1px solid var(--border);
-      background: var(--bg-alt);
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    .proj-card:hover {
-      border-color: var(--green);
-      transform: translateY(-4px);
-      background: rgba(79, 175, 79, 0.04);
-    }
-    .proj-card:nth-child(2n):hover { border-color: var(--amber); background: rgba(215, 175, 95, 0.04); }
-    .proj-card:nth-child(3n):hover { border-color: var(--cyan); background: rgba(95, 175, 175, 0.04); }
-    .proj-card .proj-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--text-dim);
-      line-height: 1;
-      transition: color 0.3s;
-    }
-    .proj-card:hover .proj-num { color: var(--green); }
-    .proj-card:nth-child(2n):hover .proj-num { color: var(--amber); }
-    .proj-card:nth-child(3n):hover .proj-num { color: var(--cyan); }
-    .proj-card .proj-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-hi);
-      line-height: 1.2;
-    }
-    .proj-card .proj-dots {
-      display: flex;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .proj-card .proj-dots .pd {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .proj-card .proj-dots .pd.g { background: var(--green-dim); }
-    .proj-card .proj-dots .pd.a { background: var(--amber-dim); }
-    .proj-card .proj-dots .pd.c { background: var(--cyan); opacity: 0.5; }
-    .proj-card .proj-dots .pd.b { background: var(--blue); opacity: 0.5; }
-    .proj-card .proj-dots .pdt {
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      letter-spacing: 0.03em;
-    }
-    .proj-card .proj-desc {
-      font-size: var(--sz-xs);
-      color: var(--text-dim);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .proj-card .proj-arrow-card {
-      align-self: flex-end;
-      font-size: 1rem;
-      color: var(--text-dim);
-      transition: all 0.3s;
-    }
-    .proj-card:hover .proj-arrow-card { color: var(--green); transform: translateX(4px); }
-
-    @media (max-width: 900px) {
-      .proj-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 500px) {
-      .proj-grid {
-        grid-template-columns: 1fr;
-        gap: 0.7rem;
-      }
-      .proj-card {
-        padding: 1rem 1.1rem;
-        gap: 0.4rem;
-      }
-      .proj-card .proj-num {
-        font-size: 2rem;
-      }
-      .proj-card .proj-name {
-        font-size: 1rem;
-      }
-    }
-
     /* ===== SERVICES ===== */
     .svc-list {
       display: flex;
@@ -1057,79 +956,61 @@
         <div></div>
       </div>
 
-      <div class="proj-grid reveal">
+      <div class="proj-table reveal">
 
-        <a class="proj-card" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
-          <div class="proj-num">01</div>
-          <div class="proj-name">CFomatting Word</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">Python</span>
-            <span class="pd a"></span><span class="pdt">FastAPI</span>
-            <span class="pd c"></span><span class="pdt">自动化</span>
-          </div>
-          <div class="proj-desc">上传 Word 范本 + 粘贴 Markdown → 自动生成符合排版规范的 .docx，解决论文/公文重复性排版痛点</div>
-          <span class="proj-arrow-card">↗</span>
+        <div class="proj-thead">
+          <span>#</span>
+          <span>PROJECT</span>
+          <span>STACK</span>
+          <span></span>
+        </div>
+
+        <a class="proj-row" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
+          <span class="proj-idx">01</span>
+          <span class="proj-title">CFomatting Word</span>
+          <span class="proj-stack"><span>Python</span><span>FastAPI</span><span>python-docx</span><span>自动化</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">上传 Word 范本 + 粘贴 Markdown 内容 → 自动生成符合排版规范的 .docx 文件。解决论文/公文/标书等重复性排版痛点。</span>
         </a>
 
-        <a class="proj-card" href="https://supersuperchik-home.pages.dev" target="_blank" rel="noopener">
-          <div class="proj-num">02</div>
-          <div class="proj-name">SuperSuperChik Home</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
-            <span class="pd a"></span><span class="pdt">Three.js</span>
-            <span class="pd c"></span><span class="pdt">Vibe Coding</span>
-          </div>
-          <div class="proj-desc">2026 个人主页，极简终端美学 · 粒子背景 · 零依赖纯静态部署</div>
-          <span class="proj-arrow-card">↗</span>
+        <a class="proj-row" href="https://supersuperchik-home.pages.dev" target="_blank" rel="noopener">
+          <span class="proj-idx">02</span>
+          <span class="proj-title">SuperSuperChik Home</span>
+          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Three.js</span><span>Vibe Coding</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">2026 个人主页，展示作品 / 技术栈 / 服务方向。极简终端美学 · Three.js 粒子背景 · 零依赖纯静态部署。</span>
         </a>
 
-        <a class="proj-card" href="https://gomoku-ai-9g7-1va.pages.dev" target="_blank" rel="noopener">
-          <div class="proj-num">03</div>
-          <div class="proj-name">AiChess</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">Canvas 2D</span>
-            <span class="pd a"></span><span class="pdt">α-β 剪枝</span>
-            <span class="pd c"></span><span class="pdt">Zobrist</span>
-          </div>
-          <div class="proj-desc">纯前端五子棋 AI 对弈，α-β 剪枝 + 迭代加深，无需后端</div>
-          <span class="proj-arrow-card">↗</span>
+        <a class="proj-row" href="https://gomoku-ai-9g7-1va.pages.dev" target="_blank" rel="noopener">
+          <span class="proj-idx">03</span>
+          <span class="proj-title">AiChess</span>
+          <span class="proj-stack"><span>JavaScript</span><span>Canvas 2D</span><span>α-β 剪枝</span><span>Zobrist 哈希</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">纯前端五子棋 AI 对弈平台。α-β 剪枝 + Zobrist 哈希 + 迭代加深，无需后端直接运行。</span>
         </a>
 
-        <a class="proj-card" href="https://light-admin.pages.dev" target="_blank" rel="noopener">
-          <div class="proj-num">04</div>
-          <div class="proj-name">Vue Admin System</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">Vue 3</span>
-            <span class="pd a"></span><span class="pdt">TypeScript</span>
-            <span class="pd c"></span><span class="pdt">Pinia</span>
-            <span class="pd b"></span><span class="pdt">Element Plus</span>
-          </div>
-          <div class="proj-desc">Vue 3 全栈后台管理模板，权限控制 / 动态路由 / 数据仪表盘</div>
-          <span class="proj-arrow-card">↗</span>
+        <a class="proj-row" href="https://light-admin.pages.dev" target="_blank" rel="noopener">
+          <span class="proj-idx">04</span>
+          <span class="proj-title">Vue Admin System</span>
+          <span class="proj-stack"><span>Vue 3</span><span>TypeScript</span><span>Vite</span><span>Pinia</span><span>Element Plus</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">Vue 3 全栈后台管理系统模板。权限控制 / 动态路由 / 数据表格 / 仪表盘图表 —— 后台高频场景全覆盖。</span>
         </a>
 
-        <a class="proj-card" href="https://github.com/3432926599-cyber/DataViz" target="_blank" rel="noopener">
-          <div class="proj-num">05</div>
-          <div class="proj-name">DataViz</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
-            <span class="pd a"></span><span class="pdt">JavaScript</span>
-            <span class="pd c"></span><span class="pdt">数据可视化</span>
-          </div>
-          <div class="proj-desc">数据可视化实验场，前端图表渲染与交互叙事探索</div>
-          <span class="proj-arrow-card">↗</span>
+        <a class="proj-row" href="https://github.com/3432926599-cyber/DataViz" target="_blank" rel="noopener">
+          <span class="proj-idx">05</span>
+          <span class="proj-title">DataViz</span>
+          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>数据可视化</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">数据可视化实验场。探索前端图表渲染与交互叙事，把枯燥数据变成可读的故事。</span>
         </a>
 
-        <a class="proj-card" href="https://github.com/3432926599-cyber/Web-TicTacToe" target="_blank" rel="noopener">
-          <div class="proj-num">06</div>
-          <div class="proj-name">Web TicTacToe</div>
-          <div class="proj-dots">
-            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
-            <span class="pd a"></span><span class="pdt">Canvas 2D</span>
-            <span class="pd c"></span><span class="pdt">Game</span>
-          </div>
-          <div class="proj-desc">纯前端井字棋，Canvas 2D 棋盘绘制，双人本地对战</div>
-          <span class="proj-arrow-card">↗</span>
+        <a class="proj-row" href="https://github.com/3432926599-cyber/Web-TicTacToe" target="_blank" rel="noopener">
+          <span class="proj-idx">06</span>
+          <span class="proj-title">Web TicTacToe</span>
+          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Canvas 2D</span></span>
+          <span class="proj-arrow">&rarr;</span>
+          <span class="proj-desc">纯前端井字棋小游戏。Canvas 2D 绘制棋盘，双人本地对战，简洁利落的交互体验。</span>
         </a>
 
       </div>
