@@ -1,4 +1,8 @@
 {
   "name": "supersuperchik-home",
-  "private": true
+  "private": true,
+  "scripts": {
+    "deploy": "node deploy.js",
+    "employ": "node deploy.js"
+  }
 }
