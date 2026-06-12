@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <title>SupersupErChik</title>
   <meta name="description" content="SupersupErChik — Full-Stack Developer & Frontend Engineer">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +50,8 @@
       overflow-x: hidden;
       -webkit-text-size-adjust: 100%;  /* 禁止微信 WebView 缩放字体 */
       text-size-adjust: 100%;
+      touch-action: manipulation;       /* 消除移动端 300ms 点击延迟 */
+      overscroll-behavior-y: contain;   /* 禁止微信下拉刷新干扰 */
     }
 
     /* scanline */
@@ -74,6 +76,47 @@
       background: var(--green); transition: width 0.3s;
     }
     .nav a:hover::after { width: 100%; }
+
+    /* ===== MOBILE BOTTOM NAV ===== */
+    .mob-nav {
+      display: none;
+    }
+    @media (max-width: 500px) {
+      .mob-nav {
+        display: flex;
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        background: rgba(18, 18, 18, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border);
+        border-radius: 2rem;
+        padding: 0.35rem 0.6rem;
+        gap: 0.3rem;
+      }
+      .mob-nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.5rem 0.9rem;
+        border-radius: 1.5rem;
+        transition: all 0.3s;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        touch-action: manipulation;
+      }
+      .mob-nav a.active,
+      .mob-nav a:active {
+        background: rgba(79, 175, 79, 0.12);
+        color: var(--green);
+      }
+    }
 
     /* ===== MAIN PADDING ===== */
     .page { padding: 0 2rem; }
@@ -147,7 +190,7 @@
     .hero-stats span { color: var(--green); font-weight: 700; }
 
     /* ===== SECTION ===== */
-    .section { padding: 4rem 0; }
+    .section { padding: 4rem 0; scroll-margin-top: 4rem; }
 
     /* ===== LABELED BLOCK ===== */
     .block-grid {
@@ -205,6 +248,88 @@
       font-family: var(--font-mono); font-size: var(--sz-sm);
       color: var(--text-dim); font-weight: 400; line-height: 1.6;
     }
+    /* about 文案标签体系 */
+    .about-text .about-h2 {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 700;
+      color: var(--green);
+      margin: 2rem 0 0.6rem;
+      line-height: 1.3;
+    }
+    .about-text .about-h3 {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 600;
+      color: var(--amber);
+      margin: 1.5rem 0 0.5rem;
+      line-height: 1.35;
+    }
+    .about-text .about-p {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 0.8rem;
+      max-width: 600px;
+    }
+    .about-text .about-tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .about-text .about-tag {
+      font-family: var(--font-mono);
+      font-size: var(--sz-sm);
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      color: var(--amber);
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .about-text .about-tag:hover {
+      border-color: var(--amber);
+      color: var(--text-hi);
+    }
+    .about-text .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin: 0.8rem 0 1.5rem;
+      padding: 0;
+    }
+    .about-text .about-list li {
+      font-family: var(--font-mono);
+      font-size: var(--sz-sm);
+      color: var(--text);
+      line-height: 1.7;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .about-text .about-list li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--green-dim);
+      font-family: var(--font-mono);
+      font-size: var(--sz-xs);
+    }
+    .about-text .about-quote {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 500;
+      color: var(--amber);
+      line-height: 1.6;
+      margin: 1.5rem 0 0;
+      padding-left: 1rem;
+      border-left: 2px solid var(--amber-dim);
+    }
 
     /* ===== SKILLS — scattered ===== */
     .skills-scatter {
@@ -240,6 +365,81 @@
     .skills-scatter .tag:nth-child(10) { margin-top: 28px;   margin-left: -35px; }
     .skills-scatter .tag:nth-child(11) { margin-top: -8px;   margin-left: 50px; }
     .skills-scatter .tag:nth-child(12) { margin-top: 14px;   margin-left: 20px; }
+
+    /* ===== CAPABILITY CARDS (02 模块) ===== */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      max-width: 780px;
+    }
+    .cap-card {
+      position: relative;
+      padding: 1.5rem 1.5rem 1.5rem 2rem;
+      border-left: 3px solid;
+      background: var(--bg-alt);
+      transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    }
+    .cap-card:hover {
+      transform: translateX(4px);
+      background: rgba(79, 175, 79, 0.03);
+    }
+    .cap-card:nth-child(1) { border-color: var(--green); }
+    .cap-card:nth-child(2) { border-color: var(--amber); }
+    .cap-card:nth-child(3) { border-color: var(--cyan); }
+    .cap-card:nth-child(4) { border-color: var(--blue); }
+    .cap-card .cap-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .cap-card .cap-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-hi);
+      margin-bottom: 0.4rem;
+    }
+    .cap-card .cap-stack {
+      font-family: var(--font-mono);
+      font-size: var(--sz-xs);
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+    }
+    .cap-card .cap-stack .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin: 0 0.25rem;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .cap-card:nth-child(1) .cap-stack .dot { background: var(--green-dim); }
+    .cap-card:nth-child(2) .cap-stack .dot { background: var(--amber-dim); }
+    .cap-card:nth-child(3) .cap-stack .dot { background: var(--cyan); opacity: 0.5; }
+    .cap-card:nth-child(4) .cap-stack .dot { background: var(--blue); opacity: 0.5; }
+    .cap-card .cap-desc {
+      font-family: var(--font-mono);
+      font-size: var(--sz-xs);
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    @media (max-width: 500px) {
+      .cap-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .cap-card {
+        padding: 1rem 1rem 1rem 1.3rem;
+      }
+      .cap-card .cap-name {
+        font-size: 1rem;
+      }
+    }
 
     /* ===== PROJECTS ===== */
     .proj-table {
@@ -309,6 +509,107 @@
       transition: color 0.25s;
     }
     .proj-row:hover .proj-desc { color: var(--text-mid); }
+
+    /* ===== PROJECT CARDS (03 模块) ===== */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .proj-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.4rem;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .proj-card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+      background: rgba(79, 175, 79, 0.04);
+    }
+    .proj-card:nth-child(2n):hover { border-color: var(--amber); background: rgba(215, 175, 95, 0.04); }
+    .proj-card:nth-child(3n):hover { border-color: var(--cyan); background: rgba(95, 175, 175, 0.04); }
+    .proj-card .proj-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .proj-card:hover .proj-num { color: var(--green); }
+    .proj-card:nth-child(2n):hover .proj-num { color: var(--amber); }
+    .proj-card:nth-child(3n):hover .proj-num { color: var(--cyan); }
+    .proj-card .proj-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-hi);
+      line-height: 1.2;
+    }
+    .proj-card .proj-dots {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .proj-card .proj-dots .pd {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .proj-card .proj-dots .pd.g { background: var(--green-dim); }
+    .proj-card .proj-dots .pd.a { background: var(--amber-dim); }
+    .proj-card .proj-dots .pd.c { background: var(--cyan); opacity: 0.5; }
+    .proj-card .proj-dots .pd.b { background: var(--blue); opacity: 0.5; }
+    .proj-card .proj-dots .pdt {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+    .proj-card .proj-desc {
+      font-size: var(--sz-xs);
+      color: var(--text-dim);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .proj-card .proj-arrow-card {
+      align-self: flex-end;
+      font-size: 1rem;
+      color: var(--text-dim);
+      transition: all 0.3s;
+    }
+    .proj-card:hover .proj-arrow-card { color: var(--green); transform: translateX(4px); }
+
+    @media (max-width: 900px) {
+      .proj-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .proj-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .proj-card {
+        padding: 1rem 1.1rem;
+        gap: 0.4rem;
+      }
+      .proj-card .proj-num {
+        font-size: 2rem;
+      }
+      .proj-card .proj-name {
+        font-size: 1rem;
+      }
+    }
 
     /* ===== SERVICES ===== */
     .svc-list {
@@ -514,14 +815,17 @@
       .page { padding: 0 1rem; }
       .section { padding: 2.5rem 0; }
 
-      /* Hero：垂直堆叠，居中 —— 微信浏览器兼容 */
+      /* Hero：全屏首屏，不露出下方模块 —— 微信兼容 */
       .hero {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding-top: 5rem;
+        padding-top: 3rem;
+        padding-bottom: 1.5rem;
         gap: 0.8rem;
-        min-height: auto;
+        min-height: calc(var(--vh, 1vh) * 100);  /* JS 动态注入高度，覆盖微信 X5 */
+        min-height: 100dvh;  /* 现代浏览器回退 */
+        justify-content: center;
       }
 
       .hero-right {
@@ -533,7 +837,7 @@
       }
 
       .hero-avatar-wrap {
-        width: 110px;
+        width: 140px;
         padding: 3px;
         flex-shrink: 0;
       }
@@ -548,7 +852,7 @@
       }
 
       .hero-name {
-        font-size: 2rem;
+        font-size: 2.4rem;
         line-height: 1.05;
       }
 
@@ -601,6 +905,42 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); }
+
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== SCROLL-DOWN HINT (mobile) ===== */
+    .scroll-hint {
+      display: none;
+    }
+    @media (max-width: 500px) {
+      .scroll-hint {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.8rem;
+        color: var(--text-dim);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        animation: pulse-arrow 2s ease-in-out infinite;
+      }
+      .scroll-hint .arrow {
+        font-size: 1rem;
+        line-height: 1;
+      }
+    }
+    @keyframes pulse-arrow {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50%      { opacity: 1;   transform: translateY(6px); }
+    }
   </style>
 </head>
 <body>
@@ -638,6 +978,10 @@
           <span>∞</span> 好奇心
         </div>
       </div>
+      <div class="scroll-hint">
+        <span class="arrow">↓</span>
+        <span>向下滚动</span>
+      </div>
     </header>
 
     <!-- ===== ABOUT ===== -->
@@ -670,23 +1014,38 @@
       <div class="block-grid">
         <div class="block-num reveal">/02</div>
         <div class="skills-block">
-          <h2 class="section-title reveal">技术栈</h2>
-          <div class="skills-scatter reveal">
-          <span class="tag">TypeScript</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">React</span>
-          <span class="tag">Vue 3</span>
-          <span class="tag">Next.js</span>
-          <span class="tag">Vite</span>
-          <span class="tag">Python</span>
-          <span class="tag">Flask</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">Pinia</span>
-          <span class="tag">Element Plus</span>
-          <span class="tag">Tailwind</span>
-          <span class="tag">Canvas 2D</span>
-          <span class="tag">CloudBase</span>
-        </div>
+          <h2 class="section-title reveal">能力领域</h2>
+          <div class="cap-grid reveal">
+
+            <div class="cap-card">
+              <div class="cap-icon">🏗️</div>
+              <div class="cap-name">前端工程化</div>
+              <div class="cap-stack">React<span class="dot"></span>Vue 3<span class="dot"></span>Next.js<span class="dot"></span>Vite<span class="dot"></span>TypeScript<span class="dot"></span>Tailwind</div>
+              <div class="cap-desc">从零搭建中大型前端项目，组件库封装与工程化实践</div>
+            </div>
+
+            <div class="cap-card">
+              <div class="cap-icon">🔧</div>
+              <div class="cap-name">全栈 & 后端</div>
+              <div class="cap-stack">Node.js<span class="dot"></span>Python<span class="dot"></span>Flask<span class="dot"></span>CloudBase</div>
+              <div class="cap-desc">独立完成前后端到部署全链路，API 设计与数据库</div>
+            </div>
+
+            <div class="cap-card">
+              <div class="cap-icon">📱</div>
+              <div class="cap-name">小程序 & 跨端</div>
+              <div class="cap-stack">Uniapp<span class="dot"></span>Element Plus<span class="dot"></span>Pinia</div>
+              <div class="cap-desc">全平台小程序快速落地，审核避坑与灰度发布</div>
+            </div>
+
+            <div class="cap-card">
+              <div class="cap-icon">🎨</div>
+              <div class="cap-name">可视化 & 交互</div>
+              <div class="cap-stack">Canvas 2D<span class="dot"></span>Three.js<span class="dot"></span>数据可视化</div>
+              <div class="cap-desc">游戏 / 图表 / 粒子效果，前端交互体验深度打磨</div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
@@ -698,61 +1057,79 @@
         <div></div>
       </div>
 
-      <div class="proj-table reveal">
+      <div class="proj-grid reveal">
 
-        <div class="proj-thead">
-          <span>#</span>
-          <span>PROJECT</span>
-          <span>STACK</span>
-          <span></span>
-        </div>
-
-        <a class="proj-row" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
-          <span class="proj-idx">01</span>
-          <span class="proj-title">CFomatting Word</span>
-          <span class="proj-stack"><span>Python</span><span>FastAPI</span><span>python-docx</span><span>自动化</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">上传 Word 范本 + 粘贴 Markdown 内容 → 自动生成符合排版规范的 .docx 文件。解决论文/公文/标书等重复性排版痛点。</span>
+        <a class="proj-card" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
+          <div class="proj-num">01</div>
+          <div class="proj-name">CFomatting Word</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">Python</span>
+            <span class="pd a"></span><span class="pdt">FastAPI</span>
+            <span class="pd c"></span><span class="pdt">自动化</span>
+          </div>
+          <div class="proj-desc">上传 Word 范本 + 粘贴 Markdown → 自动生成符合排版规范的 .docx，解决论文/公文重复性排版痛点</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
-        <a class="proj-row" href="https://supersuperchik-home.pages.dev" target="_blank" rel="noopener">
-          <span class="proj-idx">02</span>
-          <span class="proj-title">SuperSuperChik Home</span>
-          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Three.js</span><span>Vibe Coding</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">2026 个人主页，展示作品 / 技术栈 / 服务方向。极简终端美学 · Three.js 粒子背景 · 零依赖纯静态部署。</span>
+        <a class="proj-card" href="https://supersuperchik-home.pages.dev" target="_blank" rel="noopener">
+          <div class="proj-num">02</div>
+          <div class="proj-name">SuperSuperChik Home</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
+            <span class="pd a"></span><span class="pdt">Three.js</span>
+            <span class="pd c"></span><span class="pdt">Vibe Coding</span>
+          </div>
+          <div class="proj-desc">2026 个人主页，极简终端美学 · 粒子背景 · 零依赖纯静态部署</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
-        <a class="proj-row" href="https://gomoku-ai-9g7-1va.pages.dev" target="_blank" rel="noopener">
-          <span class="proj-idx">03</span>
-          <span class="proj-title">AiChess</span>
-          <span class="proj-stack"><span>JavaScript</span><span>Canvas 2D</span><span>α-β 剪枝</span><span>Zobrist 哈希</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">纯前端五子棋 AI 对弈平台。α-β 剪枝 + Zobrist 哈希 + 迭代加深，无需后端直接运行。</span>
+        <a class="proj-card" href="https://gomoku-ai-9g7-1va.pages.dev" target="_blank" rel="noopener">
+          <div class="proj-num">03</div>
+          <div class="proj-name">AiChess</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">Canvas 2D</span>
+            <span class="pd a"></span><span class="pdt">α-β 剪枝</span>
+            <span class="pd c"></span><span class="pdt">Zobrist</span>
+          </div>
+          <div class="proj-desc">纯前端五子棋 AI 对弈，α-β 剪枝 + 迭代加深，无需后端</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
-        <a class="proj-row" href="https://light-admin.pages.dev" target="_blank" rel="noopener">
-          <span class="proj-idx">04</span>
-          <span class="proj-title">Vue Admin System</span>
-          <span class="proj-stack"><span>Vue 3</span><span>TypeScript</span><span>Vite</span><span>Pinia</span><span>Element Plus</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">Vue 3 全栈后台管理系统模板。权限控制 / 动态路由 / 数据表格 / 仪表盘图表 —— 后台高频场景全覆盖。</span>
+        <a class="proj-card" href="https://light-admin.pages.dev" target="_blank" rel="noopener">
+          <div class="proj-num">04</div>
+          <div class="proj-name">Vue Admin System</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">Vue 3</span>
+            <span class="pd a"></span><span class="pdt">TypeScript</span>
+            <span class="pd c"></span><span class="pdt">Pinia</span>
+            <span class="pd b"></span><span class="pdt">Element Plus</span>
+          </div>
+          <div class="proj-desc">Vue 3 全栈后台管理模板，权限控制 / 动态路由 / 数据仪表盘</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
-        <a class="proj-row" href="https://github.com/3432926599-cyber/DataViz" target="_blank" rel="noopener">
-          <span class="proj-idx">05</span>
-          <span class="proj-title">DataViz</span>
-          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>数据可视化</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">数据可视化实验场。探索前端图表渲染与交互叙事，把枯燥数据变成可读的故事。</span>
+        <a class="proj-card" href="https://github.com/3432926599-cyber/DataViz" target="_blank" rel="noopener">
+          <div class="proj-num">05</div>
+          <div class="proj-name">DataViz</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
+            <span class="pd a"></span><span class="pdt">JavaScript</span>
+            <span class="pd c"></span><span class="pdt">数据可视化</span>
+          </div>
+          <div class="proj-desc">数据可视化实验场，前端图表渲染与交互叙事探索</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
-        <a class="proj-row" href="https://github.com/3432926599-cyber/Web-TicTacToe" target="_blank" rel="noopener">
-          <span class="proj-idx">06</span>
-          <span class="proj-title">Web TicTacToe</span>
-          <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Canvas 2D</span></span>
-          <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">纯前端井字棋小游戏。Canvas 2D 绘制棋盘，双人本地对战，简洁利落的交互体验。</span>
+        <a class="proj-card" href="https://github.com/3432926599-cyber/Web-TicTacToe" target="_blank" rel="noopener">
+          <div class="proj-num">06</div>
+          <div class="proj-name">Web TicTacToe</div>
+          <div class="proj-dots">
+            <span class="pd g"></span><span class="pdt">HTML/CSS</span>
+            <span class="pd a"></span><span class="pdt">Canvas 2D</span>
+            <span class="pd c"></span><span class="pdt">Game</span>
+          </div>
+          <div class="proj-desc">纯前端井字棋，Canvas 2D 棋盘绘制，双人本地对战</div>
+          <span class="proj-arrow-card">↗</span>
         </a>
 
       </div>
@@ -856,17 +1233,18 @@
       <div class="contact-grid reveal">
         <h2 class="contact-big">
           <span>交流</span>|<span>学习</span>|<span>合作</span>？<br>
-          每月仅接 1 位新合伙人。<br>
-          如果你是认真的想做产品、赚美金，联系我。<br>
+          每月仅接 <span>1 位新合伙人</span>。<br>
+          如果你是认真的想<span>做产品、赚美金</span>，<br>
+          联系我!<br>
           如果只是想闲聊，代码库已开源。<br>
-          联系我<br>
           愿我们无限进步!
         </h2>
 
         <div class="contact-lines">
-          <div class="contact-row"><span class="k">GitHub/项目仓库</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
-          <div class="contact-row"><span class="k">Email/邮箱</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
-          <div class="contact-row"><span class="k">WeChat/微信号</span><span class="v">x19xixi</span></div>
+          <div class="contact-row"><span class="k">📧 Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
+          <div class="contact-row"><span class="k">💬 微信</span><span class="v">x19xixi</span></div>
+          <div class="contact-row"><span class="k">📢 公众号</span><span class="v" style="color:var(--green);">我与她手谈.</span></div>
+          <div class="contact-row"><span class="k">📂 GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
         </div>
       </div>
     </section>
@@ -876,9 +1254,28 @@
       <span style="color:var(--green);">●</span>
     </footer>
 
+    <nav class="mob-nav">
+      <a href="#about">关于</a>
+      <a href="#work">项目</a>
+      <a href="#contact">联系</a>
+    </nav>
+
   </div>
 
   <script>
+    // ===== 动态 --vh（微信 X5 内核兼容）=====
+    function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    setVh();
+    window.addEventListener('resize', () => requestAnimationFrame(setVh));
+    // 微信环境：确保 X5 就绪后重算
+    if (window.WeixinJSBridge) {
+      try { WeixinJSBridge.invoke('getNetworkType', {}, setVh); } catch(e) {}
+    }
+
+    // ===== 滚动揭示动画 =====
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
@@ -886,11 +1283,29 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.querySelectorAll('.nav a').forEach(a => {
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        const t = document.querySelector(this.getAttribute('href'));
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // ===== 导航平滑滚动 =====
+    function smoothNav(sel) {
+      document.querySelectorAll(sel).forEach(a => {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          const t = document.querySelector(this.getAttribute('href'));
+          if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+    smoothNav('.nav a');
+    smoothNav('.mob-nav a');
+
+    // ===== 移动端底部导航高亮 =====
+    const sections = document.querySelectorAll('section[id]');
+    const mobLinks = document.querySelectorAll('.mob-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 200) current = '#' + sec.getAttribute('id');
+      });
+      mobLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === current);
       });
     });
   </script>
