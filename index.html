@@ -504,21 +504,25 @@
       transition: color 0.25s;
     }
     .proj-row:hover .proj-desc { color: var(--text-mid); }
-    /* 重点项目强调 */
-    .proj-row--feat {
-      border-left: 3px solid var(--green);
+    /* 项目等级标识 */
+    .proj-row--gold {
+      border-left: 3px solid var(--amber);
     }
-    .proj-row--feat:hover {
-      border-left-color: var(--amber);
-    }
-    .proj-row--feat .proj-title {
-      color: var(--green);
-    }
-    .proj-row--feat:hover .proj-title {
+    .proj-row--gold .proj-title {
       color: var(--amber);
     }
-    .proj-row--feat .proj-idx {
-      color: var(--green);
+    .proj-row--gold .proj-idx {
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .proj-row--silver {
+      border-left: 3px solid var(--text-dim);
+    }
+    .proj-row--silver .proj-title {
+      color: var(--text-hi);
+    }
+    .proj-row--silver .proj-idx {
+      color: var(--text-dim);
       font-weight: 700;
     }
 
@@ -973,17 +977,18 @@
           <span></span>
         </div>
 
-        <!-- ⭐ 重点项目 -->
-        <a class="proj-row proj-row--feat" href="https://panora-mauve.vercel.app" target="_blank" rel="noopener">
-          <span class="proj-idx">⭐ 01</span>
+        <!-- 🥇 金级 -->
+        <a class="proj-row proj-row--gold" href="https://panora-mauve.vercel.app" target="_blank" rel="noopener">
+          <span class="proj-idx">★ 01</span>
           <span class="proj-title">Panora</span>
           <span class="proj-stack"><span>TypeScript</span><span>Next.js</span><span>YouTube API</span><span>X API</span><span>OAuth</span></span>
           <span class="proj-arrow">&rarr;</span>
           <span class="proj-desc">统一创作者数据看板，暗色玻璃风 UI，集成 YouTube / X OAuth 登录，一站式查看跨平台数据表现。</span>
         </a>
 
-        <a class="proj-row" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
-          <span class="proj-idx">02</span>
+        <!-- 🥈 银级 -->
+        <a class="proj-row proj-row--silver" href="https://github.com/3432926599-cyber/cfomatting-word" target="_blank" rel="noopener">
+          <span class="proj-idx">◆ 02</span>
           <span class="proj-title">CFomatting Word</span>
           <span class="proj-stack"><span>Python</span><span>FastAPI</span><span>python-docx</span><span>自动化</span></span>
           <span class="proj-arrow">&rarr;</span>
@@ -1128,10 +1133,10 @@
         </h2>
 
         <div class="contact-lines">
-          <div class="contact-row"><span class="k">Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
-          <div class="contact-row"><span class="k">微信</span><span class="v">x19xixi</span></div>
-          <div class="contact-row"><span class="k">公众号</span><span class="v" style="color:var(--green);">我与她手谈.</span></div>
-          <div class="contact-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
+          <div class="contact-row"><span class="k">Email|邮箱</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
+          <div class="contact-row"><span class="k">WeChat|微信号</span><span class="v">x19xixi</span></div>
+          <div class="contact-row"><span class="k">WeChat Official Account|公众号</span><span class="v" style="color:var(--green);">我与她手谈.</span></div>
+          <div class="contact-row"><span class="k">GitHub 仓库</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
         </div>
       </div>
     </section>
