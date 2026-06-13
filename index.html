@@ -526,6 +526,336 @@
       font-weight: 700;
     }
 
+    /* ===== SKILL LIST (05 模块) ===== */
+    .skill-table {
+      width: 100%;
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: var(--sz-sm);
+    }
+    .skill-thead {
+      display: grid;
+      grid-template-columns: 40px 1fr 2fr 60px;
+      padding: 0.55rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--amber-dim);
+      font-size: var(--sz-xs);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .skill-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 2fr 60px;
+      padding: 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.25s;
+      align-items: center;
+    }
+    .skill-row:last-child { border-bottom: none; }
+    .skill-row:hover {
+      background: rgba(79, 175, 79, 0.04);
+      color: var(--text-hi);
+    }
+    .skill-row:hover .skill-name { color: var(--text-hi); }
+    .skill-idx {
+      color: var(--text-dim);
+      font-size: var(--sz-xs);
+    }
+    .skill-name {
+      font-weight: 700;
+      color: var(--text-hi);
+      font-family: var(--font-display);
+      font-size: var(--sz-md);
+      transition: color 0.25s;
+    }
+    .skill-overview {
+      font-size: var(--sz-xs);
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      line-height: 1.5;
+      transition: color 0.25s;
+    }
+    .skill-row:hover .skill-overview { color: var(--text-mid); }
+    .skill-tier {
+      text-align: right;
+      font-size: var(--sz-xs);
+      letter-spacing: 0.04em;
+      color: var(--text-dim);
+    }
+    /* 技能等级标识 — 金银铜 */
+    .skill-row--gold {
+      border-left: 3px solid var(--amber);
+    }
+    .skill-row--gold .skill-name {
+      color: var(--amber);
+    }
+    .skill-row--gold .skill-idx {
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .skill-row--gold .skill-tier {
+      color: var(--amber);
+    }
+    .skill-row--silver {
+      border-left: 3px solid var(--text-dim);
+    }
+    .skill-row--silver .skill-name {
+      color: var(--text-hi);
+    }
+    .skill-row--silver .skill-idx {
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+    .skill-row--silver .skill-tier {
+      color: var(--text-dim);
+    }
+    /* 铜级：左侧微弱的绿色线 */
+    .skill-row--bronze {
+      border-left: 3px solid var(--green-dim);
+    }
+    .skill-row--bronze .skill-tier {
+      color: var(--green-dim);
+    }
+
+    /* ===== SKILL LIST 移动端卡片 — 「情报档案」美学 ===== */
+    .skill-mobile-card {
+      display: none;
+    }
+    .skill-table-wrap {
+      /* PC 端正常显示 */
+    }
+    @media (max-width: 500px) {
+
+      /* ---- 表格容器：平滑展开/收起 ---- */
+      .skill-table-wrap {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.65s cubic-bezier(0.33, 1, 0.68, 1);
+      }
+      .skill-table-wrap.expanded {
+        max-height: 5200px;
+        margin-top: 1.2rem;
+      }
+
+      /* ---- 卡片本体 ---- */
+      .skill-mobile-card {
+        display: block;
+        position: relative;
+        border: 1px solid rgba(215, 175, 95, 0.25);
+        background:
+          linear-gradient(175deg, rgba(215, 175, 95, 0.04) 0%, transparent 40%),
+          var(--bg-alt);
+      }
+
+      /* 左上角装饰括号 */
+      .skill-mobile-card::before {
+        content: '';
+        position: absolute;
+        top: -1px; left: -1px;
+        width: 14px; height: 14px;
+        border-top: 2px solid var(--amber);
+        border-left: 2px solid var(--amber);
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      /* 右下角装饰括号 */
+      .skill-mobile-card::after {
+        content: '';
+        position: absolute;
+        bottom: -1px; right: -1px;
+        width: 14px; height: 14px;
+        border-bottom: 2px solid var(--amber);
+        border-right: 2px solid var(--amber);
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      /* ---- 标题栏 + 闪烁光标 ---- */
+      .skill-mobile-bar {
+        font-family: var(--font-mono);
+        font-size: var(--sz-xs);
+        padding: 0.55rem 1rem;
+        letter-spacing: 0.07em;
+        border-bottom: 1px solid rgba(215, 175, 95, 0.12);
+        background: rgba(215, 175, 95, 0.04);
+        color: var(--amber);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .skill-mobile-bar::after {
+        content: '';
+        display: inline-block;
+        width: 7px; height: 13px;
+        background: var(--amber);
+        animation: skill-cursor-blink 1.1s step-end infinite;
+      }
+
+      @keyframes skill-cursor-blink {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0; }
+      }
+
+      /* ---- 卡片内容 ---- */
+      .skill-mobile-body {
+        padding: 1.2rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      /* ---- 分区标签 ---- */
+      .skill-mobile-section-label {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--amber);
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .skill-mobile-section-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(215, 175, 95, 0.12);
+      }
+
+      /* ---- 金级技能列表：交错入场 ---- */
+      .skill-mobile-gold-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .skill-mobile-gold-item {
+        padding: 0.55rem 0.7rem;
+        background: rgba(215, 175, 95, 0.025);
+        border-left: 2px solid var(--amber-dim);
+        position: relative;
+        animation: skill-item-slide 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .skill-mobile-gold-item:nth-child(1) { animation-delay: 0.04s; }
+      .skill-mobile-gold-item:nth-child(2) { animation-delay: 0.11s; }
+      .skill-mobile-gold-item:nth-child(3) { animation-delay: 0.18s; }
+      .skill-mobile-gold-item:nth-child(4) { animation-delay: 0.25s; }
+      .skill-mobile-gold-item:nth-child(5) { animation-delay: 0.32s; }
+
+      @keyframes skill-item-slide {
+        from {
+          opacity: 0;
+          transform: translateX(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .skill-mobile-gold-item .sm-star {
+        color: var(--amber);
+        font-size: 0.62rem;
+        margin-right: 0.3rem;
+      }
+
+      .skill-mobile-gold-item .sm-name {
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: var(--amber);
+        letter-spacing: 0.02em;
+      }
+
+      .skill-mobile-gold-item .sm-desc {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-top: 0.2rem;
+        padding-left: 0.85rem;
+      }
+
+      /* ---- 引导文案 ---- */
+      .skill-mobile-teaser {
+        font-family: var(--font-mono);
+        font-size: 0.64rem;
+        color: var(--text-dim);
+        text-align: center;
+        padding: 0.3rem 0;
+        letter-spacing: 0.06em;
+        opacity: 0.65;
+      }
+
+      /* ---- 展开按钮 — 扫描线 + 括号装饰 ---- */
+      .skill-expand-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        color: var(--text);
+        background:
+          linear-gradient(180deg, rgba(79, 175, 79, 0.03) 0%, transparent 100%);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        letter-spacing: 0.06em;
+        transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease;
+        -webkit-appearance: none;
+        appearance: none;
+        min-height: 44px;
+        touch-action: manipulation;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* 扫描线划过效果 */
+      .skill-expand-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(79, 175, 79, 0.06) 50%,
+          transparent 100%
+        );
+        transform: translateY(-100%);
+        transition: transform 0.35s ease;
+        pointer-events: none;
+      }
+
+      .skill-expand-btn:active {
+        border-color: var(--green);
+        color: var(--green);
+        background: rgba(79, 175, 79, 0.06);
+      }
+
+      .skill-expand-btn:active::after {
+        transform: translateY(0);
+      }
+
+      .skill-expand-btn .btn-arrow {
+        display: inline-block;
+        transition: transform 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+        font-size: 0.65rem;
+      }
+
+      .skill-expand-btn.expanded .btn-arrow {
+        transform: rotate(180deg);
+      }
+
+    }
+
     /* ===== SERVICES ===== */
     .svc-list {
       display: flex;
@@ -712,6 +1042,10 @@
       .proj-thead { grid-template-columns: 30px 1fr 2fr 30px; padding: 0.45rem 0.8rem; }
       .proj-row { grid-template-columns: 30px 1fr 2fr 30px; padding: 0.55rem 0.8rem; }
       .proj-title { font-size: var(--sz-sm); }
+      .skill-table { font-size: var(--sz-xs); }
+      .skill-thead { grid-template-columns: 28px 1fr 2fr 50px; padding: 0.45rem 0.8rem; font-size: 0.62rem; }
+      .skill-row { grid-template-columns: 28px 1fr 2fr 50px; padding: 0.55rem 0.8rem; }
+      .skill-name { font-size: var(--sz-sm); }
       .svc-card:nth-child(1),
       .svc-card:nth-child(2),
       .svc-card:nth-child(3) { margin-left: 0; }
@@ -799,6 +1133,11 @@
       .proj-title { font-size: var(--sz-xs); }
       .proj-stack span { font-size: 0.65rem; }
       .proj-arrow { font-size: var(--sz-sm); }
+      .skill-table { font-size: var(--sz-xs); }
+      .skill-thead { grid-template-columns: 22px 1fr 1.5fr 40px; padding: 0.4rem 0.6rem; font-size: 0.58rem; }
+      .skill-row { grid-template-columns: 22px 1fr 1.5fr 40px; padding: 0.5rem 0.6rem; }
+      .skill-name { font-size: var(--sz-xs); }
+      .skill-overview { font-size: 0.62rem; }
       .svc-card:nth-child(1),
       .svc-card:nth-child(2),
       .svc-card:nth-child(3) { margin-left: 0; }
@@ -864,6 +1203,7 @@
     <a href="#about">About</a>
     <a href="#work">Work</a>
     <a href="#services">Services</a>
+    <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -966,7 +1306,7 @@
           <span class="proj-desc">2026 个人主页，展示作品 / 技术栈 / 服务方向。</span>
         </a>
 
-        <a class="proj-row" href="https://gomoku-ai-9g7-1va.pages.dev" target="_blank" rel="noopener">
+        <a class="proj-row" href="https://gomoku-ai-9g7.pages.dev" target="_blank" rel="noopener">
           <span class="proj-idx">04</span>
           <span class="proj-title">AiChess</span>
           <span class="proj-stack"><span>JavaScript</span><span>Canvas 2D</span><span>α-β 剪枝</span><span>Zobrist 哈希</span></span>
@@ -1038,8 +1378,7 @@
       </div>
 
       <div class="svc-list reveal">
-          <h2 class="section-title reveal">Free to Contact</h2>
-          <h2 class="section-title reveal">咨询 | 交流是完全免费的哦</h2>
+          <h2 class="section-title reveal">Service - Free to Contact</h2>
         <article class="svc-card">
           <div class="svc-bar">&gt; service-01</div>
           <div class="svc-body">
@@ -1118,10 +1457,210 @@
       </div>      </div>
     </section>
 
+    <!-- ===== SKILL LIST ===== -->
+    <section id="skills" class="section alt">
+      <div class="block-grid" style="margin-bottom:2rem;">
+        <div class="block-num reveal">/05</div>
+          <h2 class="section-title reveal">SKILLLIST</h2>
+        <div></div>
+      </div>
+
+      <!-- 📱 移动端：可点击展开卡片（PC 端隐藏） -->
+      <div class="skill-mobile-card reveal">
+        <div class="skill-mobile-bar">&gt; skill-list</div>
+        <div class="skill-mobile-body">
+          <div class="skill-mobile-section-label">🥇 核心技能</div>
+          <div class="skill-mobile-gold-list">
+            <div class="skill-mobile-gold-item">
+              <span class="sm-star">★</span><span class="sm-name">frontend-design</span>
+              <span class="sm-desc">创建独特的、生产级前端界面，避 AI 塑料感。双轮迭代设计流程</span>
+            </div>
+            <div class="skill-mobile-gold-item">
+              <span class="sm-star">★</span><span class="sm-name">deep-research</span>
+              <span class="sm-desc">深度调研引擎 — 多源搜索 → 交叉验证 → 合成带引用的完整报告</span>
+            </div>
+            <div class="skill-mobile-gold-item">
+              <span class="sm-star">★</span><span class="sm-name">code-review</span>
+              <span class="sm-desc">Diff 正确性审查 + 可简化性分析，支持低/中/高三级力度</span>
+            </div>
+            <div class="skill-mobile-gold-item">
+              <span class="sm-star">★</span><span class="sm-name">diagnose</span>
+              <span class="sm-desc">六阶段结构化 Debug 循环：复现→假设→插桩→修复→回归</span>
+            </div>
+            <div class="skill-mobile-gold-item">
+              <span class="sm-star">★</span><span class="sm-name">improve-codebase-architecture</span>
+              <span class="sm-desc">扫描全库，输出 HTML 可视化架构报告，防代码腐化</span>
+            </div>
+          </div>
+          <div class="skill-mobile-teaser">... 15 项技能已加密，点击解密</div>
+          <button class="skill-expand-btn" id="skillExpandBtn" aria-expanded="false">
+            <span>展开全部技能列表</span>
+            <span class="btn-arrow">↓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 🖥 完整表格：PC 直接显示 / 移动端点击展开 -->
+      <div class="skill-table-wrap reveal" id="skillTableWrap">
+        <div class="skill-table">
+          <div class="skill-thead">
+            <span>#</span>
+            <span>SKILL</span>
+            <span>OVERVIEW</span>
+            <span>TIER</span>
+          </div>
+
+          <!-- 🥇 金级 — 核心锻造技能 -->
+          <div class="skill-row skill-row--gold">
+            <span class="skill-idx">★ 01</span>
+            <span class="skill-name">frontend-design</span>
+            <span class="skill-overview">创建独特的、生产级前端界面，避 AI 塑料感。双轮迭代设计流程：构思→批判→编码，严格从设计计划推导每个色值和字体选择</span>
+            <span class="skill-tier">GOLD</span>
+          </div>
+
+          <div class="skill-row skill-row--gold">
+            <span class="skill-idx">★ 02</span>
+            <span class="skill-name">deep-research</span>
+            <span class="skill-overview">深度调研引擎 — 扇形展开多源搜索 → 交叉验证 → 合成带引用的完整报告。适合需要多维度、事实核查的复杂问题</span>
+            <span class="skill-tier">GOLD</span>
+          </div>
+
+          <div class="skill-row skill-row--gold">
+            <span class="skill-idx">★ 03</span>
+            <span class="skill-name">code-review</span>
+            <span class="skill-overview">Diff 正确性审查 + 可简化性分析，支持低/中/高三级力度。可选 --comment 发布为 PR 行内评论或 --fix 直接应用到工作树</span>
+            <span class="skill-tier">GOLD</span>
+          </div>
+
+          <div class="skill-row skill-row--gold">
+            <span class="skill-idx">★ 04</span>
+            <span class="skill-name">diagnose</span>
+            <span class="skill-overview">六阶段结构化 Debug 循环：复现→最小化→假设→插桩→修复→回归测试。适用于难以定位的 Bug 和性能退化</span>
+            <span class="skill-tier">GOLD</span>
+          </div>
+
+          <div class="skill-row skill-row--gold">
+            <span class="skill-idx">★ 05</span>
+            <span class="skill-name">improve-codebase-architecture</span>
+            <span class="skill-overview">扫描全库，输出 HTML 可视化架构报告：模块深度分析、耦合检测、Before/After 对比图、优先级排序。防代码腐化</span>
+            <span class="skill-tier">GOLD</span>
+          </div>
+
+          <!-- 🥈 银级 — 工作流核心技能 -->
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 06</span>
+            <span class="skill-name">grill-with-docs</span>
+            <span class="skill-overview">深度需求拷问，边问边沉淀术语到 CONTEXT.md + 创建架构决策记录 (ADR)。确保需求与领域模型对齐</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 07</span>
+            <span class="skill-name">to-prd</span>
+            <span class="skill-overview">从对话上下文和代码库理解中合成完整 PRD，包含问题陈述→解决方案→User Stories→实现决策→边界声明。自动发布到 GitHub Issue</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 08</span>
+            <span class="skill-name">to-issues</span>
+            <span class="skill-overview">PRD 垂直拆分为可并行开发的曳光弹 Issues，每个 Issue = Schema→API→UI→Test 全走通，标注 AFK/HITL 类型</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 09</span>
+            <span class="skill-name">tdd</span>
+            <span class="skill-overview">红→绿→重构循环。一次只一个测试，只验证公共接口行为，不许测私有方法。先绿后重构，红时不重构</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 10</span>
+            <span class="skill-name">verify</span>
+            <span class="skill-overview">验证代码变更是否真正生效 — 运行应用并观察行为，确认修复/功能按预期工作</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 11</span>
+            <span class="skill-name">handoff</span>
+            <span class="skill-overview">压缩当前对话为交接文档，下一个 Agent 无缝接手。适合上下文过长需要换会话的场景</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 12</span>
+            <span class="skill-name">simplify</span>
+            <span class="skill-overview">审查变更代码的复用性、简化性、效率和高层抽象优化。纯质量审查，不猎 Bug（用 code-review）</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <!-- 🥉 铜级 — 实用工具技能 -->
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 13</span>
+            <span class="skill-name">update-config</span>
+            <span class="skill-overview">配置 Claude Code harness settings.json — 权限、钩子、环境变量。支持项目级/用户级配置分离</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 14</span>
+            <span class="skill-name">loop</span>
+            <span class="skill-overview">按间隔重复运行 prompt 或 slash 命令，支持自定义间隔。适用于轮询部署状态、定时检查等场景</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 15</span>
+            <span class="skill-name">run</span>
+            <span class="skill-overview">启动并驱动项目应用，支持 CLI/Server/TUI/Electron/浏览器驱动等多种项目类型自动识别</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 16</span>
+            <span class="skill-name">claude-api</span>
+            <span class="skill-overview">Claude API / Anthropic SDK 参考 — 模型 ID、定价、参数、流式、工具使用、MCP、Token 计数、模型迁移</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 17</span>
+            <span class="skill-name">security-review</span>
+            <span class="skill-overview">安全审查 — 对代码变更进行安全维度扫描，发现潜在安全漏洞和风险点</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 18</span>
+            <span class="skill-name">init / review</span>
+            <span class="skill-overview">项目初始化 + PR 审查。init 搭建项目骨架，review 拉取并审查 Pull Request</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 19</span>
+            <span class="skill-name">fewer-permission-prompts</span>
+            <span class="skill-overview">扫描 transcripts 中的只读 Bash/MCP 工具调用，添加优先白名单到 .claude/settings.json，减少权限提示</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 20</span>
+            <span class="skill-name">keybindings-help</span>
+            <span class="skill-overview">自定义键盘快捷键 — 重绑定按键、添加和弦绑定、修改提交键。编辑 ~/.claude/keybindings.json</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CONTACT ===== -->
     <section id="contact" class="section alt">
       <div class="block-grid" style="margin-bottom:2rem;">
-        <div class="block-num reveal">/05</div>
+        <div class="block-num reveal">/06</div>
         <div></div>
       </div>
 
@@ -1149,6 +1688,7 @@
     <nav class="mob-nav">
       <a href="#about">关于</a>
       <a href="#work">项目</a>
+      <a href="#skills">技能</a>
       <a href="#contact">联系</a>
     </nav>
 
@@ -1200,6 +1740,41 @@
         a.classList.toggle('active', a.getAttribute('href') === current);
       });
     });
+
+    // ===== SKILLList 移动端展开/收起（CSS max-height 动画驱动）=====
+    (function() {
+      var btn = document.getElementById('skillExpandBtn');
+      var wrap = document.getElementById('skillTableWrap');
+      if (!btn || !wrap) return;
+
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+
+        if (expanded) {
+          // 收起 → 先收表格，动画结束后滚回卡片
+          wrap.classList.remove('expanded');
+          btn.classList.remove('expanded');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.querySelector('span:first-child').textContent = '展开全部技能列表';
+          // 等 CSS max-height 过渡收拢后再滚动（0.65s 动画）
+          setTimeout(function() {
+            var card = document.querySelector('.skill-mobile-card');
+            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 680);
+        } else {
+          // 展开 → 触发 CSS max-height 动画 + reveal
+          wrap.classList.add('expanded');
+          wrap.classList.add('visible');
+          btn.classList.add('expanded');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.querySelector('span:first-child').textContent = '收起技能列表';
+          // 等 max-height 展开到一定高度后滚动
+          setTimeout(function() {
+            wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 200);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
