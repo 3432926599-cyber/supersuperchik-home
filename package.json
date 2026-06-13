@@ -4,5 +4,8 @@
   "scripts": {
     "deploy": "node deploy.js",
     "employ": "node deploy.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.100.0"
   }
 }
