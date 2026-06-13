@@ -1244,9 +1244,11 @@
     .svc-card:nth-child(1) { margin-left: 0;    border-color: var(--green-dim); }
     .svc-card:nth-child(2) { margin-left: 28px;  border-color: var(--amber-dim); }
     .svc-card:nth-child(3) { margin-left: 56px;  border-color: var(--border); }
+    .svc-card:nth-child(4) { margin-left: 84px;  border-color: var(--blue); }
     .svc-card:nth-child(1):hover { border-color: var(--green); }
     .svc-card:nth-child(2):hover { border-color: var(--amber); }
     .svc-card:nth-child(3):hover { border-color: var(--cyan); }
+    .svc-card:nth-child(4):hover { border-color: var(--blue); }
     .svc-card:hover { transform: translateX(6px); }
 
     .svc-bar {
@@ -1260,6 +1262,7 @@
     .svc-card:nth-child(1) .svc-bar { color: var(--green); }
     .svc-card:nth-child(2) .svc-bar { color: var(--amber); }
     .svc-card:nth-child(3) .svc-bar { color: var(--cyan); }
+    .svc-card:nth-child(4) .svc-bar { color: var(--blue); }
 
     .svc-body {
       display: flex;
@@ -1425,7 +1428,8 @@
       .skill-name { font-size: var(--sz-sm); }
       .svc-card:nth-child(1),
       .svc-card:nth-child(2),
-      .svc-card:nth-child(3) { margin-left: 0; }
+      .svc-card:nth-child(3),
+      .svc-card:nth-child(4) { margin-left: 0; }
       .svc-body { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.2rem; }
       .svc-right { align-items: flex-start; width: 100%; }
       .svc-points { gap: 0.3rem; }
@@ -1517,7 +1521,8 @@
       .skill-overview { font-size: 0.7rem; }
       .svc-card:nth-child(1),
       .svc-card:nth-child(2),
-      .svc-card:nth-child(3) { margin-left: 0; }
+      .svc-card:nth-child(3),
+      .svc-card:nth-child(4) { margin-left: 0; }
       .svc-body { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1rem; }
       .svc-left { min-width: 0; }
       .svc-icon { font-size: 2rem; }
@@ -1624,28 +1629,31 @@
       </div>
       <h2 class="section-title reveal">ABOUT</h2>
       <div class="about-text reveal">
-        我是一个不会写代码的程序员，<em>梦想是财富自由然后做游民</em><br>
-          不爱搞科研，学习的动力只是为了做好自己的数字产品，不喜欢程序只在黑乎乎的<em>后台</em>里面跑的感觉<br>
-          <em>Vibe coding</em>重度依赖，所有复用流程封装成SKILL，刷抖音然后等项目部署成功。<br>
-          <em>用最懒的方式，做最稳的产品</em>。<br>
+          <em>“HelloWorld怎么写来着？”</em><br>
+          我是一个不写代码的计算机专业学生<br>
+          不是不会写，只是不知道为什么要写<br>
+          <em>人工智障</em>式开发，不香吗？<br>
           <br>
           <em>你会不会常常这样想----</em><br>
-          <br>
-          总是有无数好idea但是代码无能？<br>
-          是技术大牛却贫困潦倒？不懂变现？<br>
+          总是有无数好idea但是无力实现？<br>
+          是技术大牛却"贫困潦倒"？<br>
           不知道怎么实现产品闭环？<br>
-          怎么做产品分发(distribution)？<br>
+          什么是产品分发(distribution)？<br>
           什么是PWF?<br>
           <br>
-          <em>你真的懂开发吗？</em><br>
+
+          <em>你对产品的理解是怎么样的？</em><br>
           平均开发时间两天，产品被agent光速推上线<br>
           只用聊天？内置星星工作流用chat代替code<br>
           敏捷迭代，PRD到issues只用一个指令<br>
           自动化部署&交付，免费永久地址预览线上url<br>
-          你突然发现你是真的懂开发，2026AI元年开发不是把时间浪费在死磕代码、算法上。<br>
+          你突然发现你是真的懂开发，2026AI元年，产品开发不是把时间浪费在死磕代码、算法上<br>
+          <br>
+          你要跟92硕博学子竞争吗？我的选择是—— <br>
+          <em>你强任你强，我直接内置星星工作流</em><br>
 
           <em>或许你对以下模块比较感兴趣----</em><br>
-          <br>海外SaaS  |  Uniapp(小程序)  |  Web变现  |  Android/ios开发<br>
+          海外SaaS  |  Uniapp(小程序)  |  Web变现  |  Android开发<br>
           这将会是未来个人开发者的核心领域<br>
           <span class="note">如果你真的有这些想法，请你看下去———</span>
       </div>
@@ -1730,7 +1738,8 @@
 
       <h2 class="section-title reveal">⭐ 星星工作流</h2>
       <p class="reveal" style="font-family:var(--font-mono);font-size:var(--sz-xs);color:var(--text-dim);margin-bottom:1.5rem;max-width:600px;line-height:1.6;">
-        从想法到交付的五阶速验法。每一步都有 <span style="color:var(--green-dim);">/命令</span>，输入即启动。
+        一键让Agent给你干到死——<br>
+        GITHUBstars第一的工作流<span style="color:var(--green-dim);">/命令</span>封装，硅谷顶级开发者的产品心经，输入即启动
       </p>
 
       <div class="wf-timeline reveal">
@@ -1753,7 +1762,7 @@
             <span class="wf-phase-name">需求 → PRD</span>
             <span class="wf-phase-cmd">/grill-with-docs</span>
           </div>
-          <div class="wf-phase-desc">深度审讯式追问：每个概念精准定义，每个决策记录在案。</div>
+          <div class="wf-phase-desc">深度审讯式追问：帮你厘清思路，梳理需求，工作留痕。</div>
           <div class="wf-phase-output">PRD 发布到 GitHub Issue，标签 ready-for-agent</div>
         </div>
 
@@ -1775,7 +1784,7 @@
             <span class="wf-phase-name">实现 & 测试</span>
             <span class="wf-phase-cmd">/tdd</span>
           </div>
-          <div class="wf-phase-desc">🔴 写失败的测试 → 🟢 最少代码过关 → 🔵 重构优化。一次一个测试，红时不重构。</div>
+          <div class="wf-phase-desc">Red 写失败的测试 → Green 最少代码过关 →Blue 重构优化。一次一个测试，红时不重构。</div>
           <div class="wf-phase-output">每 Issue 独立可验证交付，测试绿全覆盖</div>
         </div>
 
@@ -1879,6 +1888,30 @@
               <div class="svc-label">// 适合谁</div>
               <p class="svc-fit">想做独立开发者的程序员 &middot; 想靠 Vibe Coding 放大生产力的自由职业者</p>
               <a href="#contact" class="svc-cta">[ 交流学习 → ]</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <div class="svc-bar">&gt; service-04</div>
+          <div class="svc-body">
+            <div class="svc-left">
+              <div class="svc-icon">🛠️</div>
+              <h3 class="svc-name">Dev Service | 开发业务</h3>
+              <p class="svc-tagline">小游戏 / 个人网页 / 后台系统<br>把你的需求变成产品</p>
+            </div>
+            <div class="svc-right">
+              <div class="svc-label">// 承接项目</div>
+              <ul class="svc-points">
+                <li>微信小游戏开发，从创意到上线全流程</li>
+                <li>个人主页 / 作品集网站制作（就像这个）</li>
+                <li>后台管理系统定制开发（Vue 3 / React）</li>
+                <li>API 接口开发与第三方服务对接</li>
+                <li>小程序快速原型 &amp; MVP 落地</li>
+              </ul>
+              <div class="svc-label">// 适合谁</div>
+              <p class="svc-fit">有产品想法需要技术实现的个人或小团队 &middot; 需要快速落地原型的创业者</p>
+              <a href="#contact" class="svc-cta">[ 聊聊需求 → ]</a>
             </div>
           </div>
         </article>
@@ -2114,7 +2147,7 @@
 
         <div class="contact-lines">
           <div class="contact-row"><span class="k">Email|邮箱</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
-          <div class="contact-row"><span class="k">WeChat|微信号</span><span class="v">x19xixi</span></div>
+          <div class="contact-row"><span class="k">WeChat|微信号</span><span class="v">SupersupErChik0124</span></div>
           <div class="contact-row"><span class="k">Account|公众号</span><span class="v" style="color:var(--green);">我与她手谈.</span></div>
           <div class="contact-row"><span class="k">GitHub|源码</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
         </div>
