@@ -1631,6 +1631,18 @@
     .contact-tab:hover { color: var(--text); }
     .contact-tab.active { color: var(--green); border-bottom-color: var(--green); }
 
+    /* ===== CONTACT — 左右分栏 ===== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-form-area {
+      min-width: 0;
+    }
+
     /* Contact form */
     .contact-form-panel { display: none; }
     .contact-form-panel.active { display: block; }
@@ -1639,7 +1651,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-width: 520px;
+      max-width: 100%;
     }
     .contact-form label {
       font-family: var(--font-mono);
@@ -1710,6 +1722,56 @@
     .copy-btn:hover { border-color: var(--green); color: var(--green); }
     .copy-btn.copied { border-color: var(--green); color: var(--green); }
 
+    /* ===== CONTACT — 右侧栏 ===== */
+    .contact-sidebar {
+      position: sticky;
+      top: 6rem;
+    }
+    .contact-sidebar-inner {
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 1.5rem;
+    }
+    .contact-sidebar-heading {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-hi);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-sidebar .contact-row {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-sidebar .contact-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .contact-trust {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .contact-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: var(--sz-sm);
+      color: var(--text-dim);
+    }
+    .contact-trust-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      width: 1.4rem;
+      text-align: center;
+    }
+
     /* ===== FOOTER ===== */
     .footer {
       padding: 2.5rem 0; border-top: 1px solid var(--border);
@@ -1752,6 +1814,8 @@
       .skill-row { grid-template-columns: 28px 1fr 2fr 50px; padding: 0.55rem 0.8rem; }
       .skill-name { font-size: var(--sz-sm); }
       .svc-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-sidebar { position: static; }
       .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .contact-big { font-size: 1.8rem; }
       .skills-scatter .tag { margin: 0 !important; }
@@ -2502,8 +2566,11 @@
         <button class="contact-tab" data-tab="consult">CONSULT · 帮你想</button>
       </div>
 
+      <div class="contact-layout reveal">
+        <div class="contact-form-area">
+
       <!-- BUILD form -->
-      <div class="contact-form-panel active reveal" id="panel-build">
+      <div class="contact-form-panel active" id="panel-build">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
           新项目还是烂尾接手？告诉我你的情况——24h 内回复，给出技术方案和报价。
         </p>
@@ -2572,16 +2639,33 @@
           <textarea name="context" placeholder="简单介绍你的情况，越具体越好——这样咨询时可以直接进入正题。" required></textarea>
           <button type="submit" class="form-submit">预约咨询 →</button>
         </form>
-      </div>
+        </div><!-- /contact-form-area -->
 
-      <!-- Direct contact -->
-      <div class="contact-lines reveal" style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
-        <div class="contact-row"><span class="k">WeChat</span><span class="v">SupersupErChik0124 <button class="copy-btn" onclick="navigator.clipboard.writeText('SupersupErChik0124');this.textContent='已复制!';this.classList.add('copied');setTimeout(()=>{this.textContent='复制';this.classList.remove('copied')},2000)">复制</button></span></div>
-        <div class="contact-row"><span class="k">Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
+        <!-- Right: 联系方式 + 信任信号 -->
+        <aside class="contact-sidebar">
+          <div class="contact-sidebar-inner">
+            <p class="contact-sidebar-heading">直达联系</p>
+            <div class="contact-row"><span class="k">WeChat</span><span class="v">SupersupErChik0124 <button class="copy-btn" onclick="navigator.clipboard.writeText('SupersupErChik0124');this.textContent='已复制!';this.classList.add('copied');setTimeout(()=>{this.textContent='复制';this.classList.remove('copied')},2000)">复制</button></span></div>
+            <div class="contact-row"><span class="k">Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
+            <div class="contact-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
 
-        <div class="contact-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
-        <p style="font-family:var(--font-mono);font-size:var(--sz-xs);color:var(--text-dim);text-align:right;margin-top:0.8rem;">每周接受前 30 位咨询 · 请说明来意</p>
-      </div>
+            <div class="contact-trust">
+              <div class="contact-trust-item">
+                <span class="contact-trust-icon">&#x23F1;</span>
+                <span>24h 内回复</span>
+              </div>
+              <div class="contact-trust-item">
+                <span class="contact-trust-icon">&#x1F4AC;</span>
+                <span>首次咨询 30min 免费</span>
+              </div>
+              <div class="contact-trust-item">
+                <span class="contact-trust-icon">&#x1F4CB;</span>
+                <span>每周接受前 30 位咨询</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div><!-- /contact-layout -->
     </section>
 
     <footer class="footer">
@@ -2757,6 +2841,11 @@
       document.querySelectorAll('.contact-form').forEach(function(form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
+
+          // 防重复提交：按钮禁用 + form 级锁
+          if (form.dataset.submitting === 'true') return;
+          form.dataset.submitting = 'true';
+
           var btn = form.querySelector('.form-submit');
           var origText = btn.textContent;
           btn.textContent = '发送中...';
@@ -2794,6 +2883,7 @@
                 btn.textContent = origText;
                 btn.disabled = false;
                 btn.style.background = '';
+                form.dataset.submitting = '';
               }, 3000);
             } else {
               throw new Error(data.msg || '发送失败');
@@ -2803,6 +2893,7 @@
             btn.textContent = '发送失败，重试 →';
             btn.disabled = false;
             btn.style.background = 'var(--red)';
+            form.dataset.submitting = '';
             setTimeout(function() {
               btn.textContent = origText;
               btn.style.background = '';
