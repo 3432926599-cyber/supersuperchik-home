@@ -101,55 +101,44 @@
     .nav a:hover { color: var(--green); background: rgba(79,175,79,0.08); }
     .nav a::after { display: none; }
 
-    /* ===== MOBILE BOTTOM NAV ===== */
-    .mob-nav {
-      display: none;
-    }
+    /* ===== MOBILE RIGHT-TOP NAV ===== */
     @media (max-width: 500px) {
-      .mob-nav {
+      .nav {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         position: fixed;
-        bottom: 1rem;
-        left: 50%;
-        transform: translateX(-50%) translateZ(0);
-        -webkit-transform: translateX(-50%) translateZ(0);
+        top: 0.7rem;
+        right: 0.7rem;
         z-index: 100;
-        background: rgba(13, 13, 13, 0.95);
-        border: 1px solid var(--border);
-        border-radius: 2rem;
-        padding: 0.35rem 0.6rem;
-        gap: 0.3rem;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-      }
-      @supports (backdrop-filter: blur(16px)) {
-        .mob-nav {
-          background: rgba(13, 13, 13, 0.85);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-        }
-      }
-      .mob-nav a {
-        color: var(--text-dim);
-        text-decoration: none;
-        font-size: 0.7rem;
+        gap: 0;
+        font-size: 0.6rem;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        padding: 0.5rem 0.9rem;
-        border-radius: 1.5rem;
+        background: rgba(13,13,13,0.92);
+        border: 1px solid var(--border);
+        padding: 0.2rem;
+      }
+      @supports (backdrop-filter: blur(8px)) {
+        .nav {
+          background: rgba(13,13,13,0.78);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+      }
+      .nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        padding: 0.35rem 0.6rem;
         transition: all 0.3s;
-        min-height: 44px;
+        min-height: 36px;
         display: flex;
         align-items: center;
         touch-action: manipulation;
       }
-      .mob-nav a.active,
-      .mob-nav a:active {
-        background: rgba(79, 175, 79, 0.12);
-        color: var(--green);
-      }
+      .nav a:hover,
+      .nav a:active { color: var(--green); }
     }
 
     /* ===== MAIN PADDING ===== */
@@ -1887,7 +1876,6 @@
         justify-content: center;
       }
 
-      .nav { display: none; }
       .block-num,
       .alt .block-grid > .block-num { font-size: 1.2rem; }
       .about-text { font-size: 0.84rem; line-height: 1.5; }
@@ -2037,8 +2025,7 @@
         <p class="hero-positioning">帮你做 <span class="hero-dot">·</span> 教你做 <span class="hero-dot">·</span> 帮你想</p>
         <p class="hero-sub">从想法到上线，一个人就是一支团队。<br>外包搞砸了？我来接手重建——两周内让它上线。</p>
         <div class="hero-cta-group">
-          <a href="#services" class="hero-cta hero-cta--primary">看我能做什么 ↓</a>
-          <a href="#contact" class="hero-cta hero-cta--secondary">直接聊 →</a>
+          <a href="#contact" class="hero-cta hero-cta--primary">直接聊 →</a>
         </div>
       </div>
 
@@ -2582,7 +2569,7 @@
           <label>项目描述</label>
           <textarea name="project" placeholder="新项目：海外SaaS / 小程序 / H5传播页？还是烂尾接手：原项目卡在哪了？目标用户是谁？" required></textarea>
           <label>预算范围</label>
-          <input type="text" name="budget" placeholder="例如：5k-8k，或"聊聊再说"">
+          <input type="text" name="budget" placeholder="填写您内心对于项目的预算范围，或"聊聊再说"">
           <button type="submit" class="form-submit">发送需求 →</button>
         </form>
       </div>
@@ -2662,12 +2649,6 @@
       <span style="color:var(--green);">●</span>
     </footer>
 
-    <nav class="mob-nav">
-      <a href="#about">关于</a>
-      <a href="#services">服务</a>
-      <a href="#work">项目</a>
-      <a href="#contact">联系</a>
-    </nav>
 
   </div>
 
@@ -2703,20 +2684,6 @@
       });
     }
     smoothNav('.nav a');
-    smoothNav('.mob-nav a');
-
-    // ===== 移动端底部导航高亮 =====
-    const sections = document.querySelectorAll('section[id]');
-    const mobLinks = document.querySelectorAll('.mob-nav a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 200) current = '#' + sec.getAttribute('id');
-      });
-      mobLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === current);
-      });
-    });
 
     // ===== SKILLList 移动端展开/收起（CSS max-height 动画驱动）=====
     (function() {
