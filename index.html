@@ -101,44 +101,53 @@
     .nav a:hover { color: var(--green); background: rgba(79,175,79,0.08); }
     .nav a::after { display: none; }
 
-    /* ===== MOBILE RIGHT-TOP NAV ===== */
+    /* ===== MOBILE BOTTOM NAV ===== */
+    .mob-nav { display: none; }
     @media (max-width: 500px) {
-      .nav {
+      .mob-nav {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         position: fixed;
-        top: 0.7rem;
-        right: 0.7rem;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%) translateZ(0);
+        -webkit-transform: translateX(-50%) translateZ(0);
         z-index: 100;
-        gap: 0;
-        font-size: 0.6rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        background: rgba(13,13,13,0.92);
+        background: rgba(13,13,13,0.95);
         border: 1px solid var(--border);
-        padding: 0.2rem;
+        border-radius: 2rem;
+        padding: 0.35rem 0.6rem;
+        gap: 0.3rem;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.6);
       }
-      @supports (backdrop-filter: blur(8px)) {
-        .nav {
-          background: rgba(13,13,13,0.78);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+      @supports (backdrop-filter: blur(16px)) {
+        .mob-nav {
+          background: rgba(13,13,13,0.85);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
         }
       }
-      .nav a {
+      .mob-nav a {
         color: var(--text-dim);
         text-decoration: none;
-        padding: 0.35rem 0.6rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.5rem 0.9rem;
+        border-radius: 1.5rem;
         transition: all 0.3s;
-        min-height: 36px;
+        min-height: 44px;
         display: flex;
         align-items: center;
         touch-action: manipulation;
       }
-      .nav a:hover,
-      .nav a:active { color: var(--green); }
+      .mob-nav a.active,
+      .mob-nav a:active {
+        background: rgba(79,175,79,0.12);
+        color: var(--green);
+      }
     }
 
     /* ===== MAIN PADDING ===== */
@@ -1878,6 +1887,7 @@
         justify-content: center;
       }
 
+      .nav { display: none; }
       .block-num,
       .alt .block-grid > .block-num { font-size: 1.2rem; }
       .about-text { font-size: 0.84rem; line-height: 1.5; }
@@ -2645,10 +2655,16 @@
     </section>
 
     <footer class="footer">
-      <span>© 2026 SupersupErChik</span>
+      <span>© 2026 Chik.io</span>
       <span style="color:var(--green);">●</span>
     </footer>
 
+    <nav class="mob-nav">
+      <a href="#about">关于</a>
+      <a href="#services">服务</a>
+      <a href="#work">项目</a>
+      <a href="#contact">联系</a>
+    </nav>
 
   </div>
 
@@ -2684,6 +2700,20 @@
       });
     }
     smoothNav('.nav a');
+    smoothNav('.mob-nav a');
+
+    // ===== 移动端底部导航高亮 =====
+    var sections = document.querySelectorAll('section[id]');
+    var mobLinks = document.querySelectorAll('.mob-nav a');
+    window.addEventListener('scroll', function() {
+      var current = '';
+      sections.forEach(function(sec) {
+        if (window.scrollY >= sec.offsetTop - 200) current = '#' + sec.getAttribute('id');
+      });
+      mobLinks.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === current);
+      });
+    });
 
     // ===== SKILLList 移动端展开/收起（CSS max-height 动画驱动）=====
     (function() {
