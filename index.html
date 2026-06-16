@@ -157,13 +157,14 @@
       padding-top: 5rem;
       padding-bottom: 3rem;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3rem;
     }
 
     .hero-left {
-      flex: 0 1 auto;
-      max-width: 48%;
+      min-width: 0;
+      padding-right: 0.5rem;
     }
 
     .hero-tag {
@@ -174,14 +175,15 @@
 
     .hero-name {
       font-family: var(--font-display);
-      font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+      font-size: clamp(3rem, 7.5vw, 6.5rem);
       font-weight: 800;
       color: var(--text-hi);
-      line-height: 0.88;
+      line-height: 1;
       letter-spacing: -0.02em;
     }
     .hero-name .line {
       display: block;
+      padding-bottom: 0.08em;
     }
     .hero-name .hl {
       color: var(--green);
@@ -1782,9 +1784,9 @@
     /* ===== RESPONSIVE — Tablet ===== */
     @media (max-width: 900px) {
       .section { padding: 3rem 0; }
-      .hero { flex-direction: column-reverse; min-height: auto; gap: 1.5rem; padding-top: 5rem; align-items: flex-start; }
+      .hero { grid-template-columns: 1fr; min-height: auto; gap: 1.5rem; padding-top: 5rem; }
       .hero-left { max-width: 100%; }
-      .hero-right { align-items: flex-start; }
+      .hero-right { align-items: flex-start; order: -1; }
       .hero-avatar-wrap { width: 200px; }
       .hero-stats { gap: 1rem; }
       .block-grid,
@@ -1819,7 +1821,7 @@
 
       /* Hero：全屏首屏，不露出下方模块 —— 微信兼容 */
       .hero {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: center;
         text-align: center;
         padding: 1rem 0.75rem 1rem;
@@ -1827,6 +1829,7 @@
         min-height: calc(var(--vh, 1vh) * 100);
         min-height: 100dvh;
         justify-content: center;
+        place-content: center;
       }
 
       .hero-right {
@@ -1844,7 +1847,6 @@
       }
 
       .hero-left {
-        flex: none;
         width: 100%;
         max-width: 100%;
         padding-left: 0;
@@ -1853,7 +1855,7 @@
       }
 
       .hero-name {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
         line-height: 1.05;
       }
 
@@ -2023,7 +2025,6 @@
           <span class="line"><span class="hl">Er</span>Chik</span>
         </h1>
         <p class="hero-positioning">帮你做 <span class="hero-dot">·</span> 教你做 <span class="hero-dot">·</span> 帮你想</p>
-        <p class="hero-sub">从想法到上线，一个人就是一支团队。<br>外包搞砸了？我来接手重建——两周内让它上线。</p>
         <div class="hero-cta-group">
           <a href="#contact" class="hero-cta hero-cta--primary">直接聊 →</a>
         </div>
@@ -2054,8 +2055,8 @@
       <h2 class="section-title reveal">ABOUT</h2>
 
       <div class="about-professional reveal">
-        <p>帮创业者把产品落地——从零搭建或烂尾接手，两周内上线：<span style="color:var(--green);">海外 SaaS</span> · <span style="color:var(--amber);">Uniapp 小程序</span> · <span style="color:var(--cyan);">微信 H5 传播页</span>。</p>
-        <p>所有外包平台都在帮你找开发者——我是帮你<em style="font-style:normal;color:var(--amber);">收拾烂摊子</em>的。交付过 5 个精选项目，用星星工作流保证每一步可验证。</p>
+        <p>帮创业者把产品落地——从零搭建或烂尾接手，一周内上线：<span style="color:var(--green);">海外 SaaS</span> · <span style="color:var(--amber);">Uniapp 小程序</span> · <span style="color:var(--cyan);">微信 H5 传播页</span>。</p>
+        <p>所有外包平台都在帮你找开发者——我是帮你<em style="font-style:normal;color:var(--amber);">收拾烂摊子</em>的。</p>
         <p style="color:var(--amber); font-weight:600;">如果你脑子里天天蹦 idea 但代码无能——或者外包被坑了、项目烂尾了不知道怎么收场——</p>
         <p style="color:var(--text-hi); font-weight:600;">这里就是给你的。</p>
       </div>
