@@ -38,7 +38,6 @@ Personal portfolio & brand homepage built with the **Dark Terminal** aesthetic. 
 | **Hero** | Name, role, tagline with terminal styling |
 | **About** | Background, philosophy, tech ethos |
 | **Projects** | Portfolio showcase with gold/silver tier indicators |
-| **Star Workflow** | 星星工作流 — 5-phase product development methodology |
 | **Services** | MVP Sprint · Global SaaS · Indie Hustle · Dev Service |
 | **Skill List** | Expandable skill matrix with proficiency levels |
 | **Contact** | GitHub, email, social links |
