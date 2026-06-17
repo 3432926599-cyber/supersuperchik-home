@@ -8,7 +8,7 @@
   <meta name="x5-page-mode" content="app">
   <meta name="format-detection" content="telephone=no,email=no">
   <title>Chik.io</title>
-  <meta name="description" content="SupersupErChik — Full-Stack Developer & Frontend Engineer">
+  <meta name="description" content="Chik.io — 一人产品实验室，帮有想法的人把产品做出来。正在扩招同好中。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=block" rel="stylesheet">
@@ -1702,6 +1702,58 @@
       color: var(--green);
     }
 
+    /* JOIN invitation block */
+    .join-invite {
+      margin-bottom: 1.8rem;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--green);
+      background: var(--bg-alt);
+    }
+    .join-invite-headline {
+      font-family: var(--font-display);
+      font-size: var(--sz-big);
+      color: var(--text-hi);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .join-invite-body {
+      font-family: var(--font-mono);
+      font-size: var(--sz-sm);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .join-invite-body p {
+      margin-bottom: 0.6rem;
+    }
+    .join-invite-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0;
+    }
+    .join-invite-body li {
+      padding: 0.35rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .join-invite-body li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+    }
+    .join-invite-body em {
+      font-style: normal;
+      color: var(--amber);
+    }
+    .join-invite-close {
+      color: var(--text-hi) !important;
+      margin-top: 0.8rem !important;
+    }
+    .join-invite-close strong {
+      color: var(--green);
+      font-weight: 600;
+    }
+
     /* Copy button */
     .copy-btn {
       display: inline-flex;
@@ -2015,8 +2067,8 @@
 
   <nav class="nav">
     <a href="#about">About</a>
-    <a href="#services">Services</a>
     <a href="#work">Projects</a>
+    <a href="#services">Services</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -2029,13 +2081,13 @@
     <!-- ===== HERO ===== -->
     <header class="hero">
       <div class="hero-left reveal">
-        <div class="hero-tag">Full-Stack Developer &amp; Frontend Engineer</div>
+        <div class="hero-tag">一人产品实验室 · 招队友</div>
         <h1 class="hero-name">
           <span class="line">Chik<span class="hl">.</span>io</span>
         </h1>
-        <p class="hero-positioning">帮你做 <span class="hero-dot">·</span> 教你做 <span class="hero-dot">·</span> 帮你想</p>
+        <p class="hero-positioning">想法进来 <span class="hero-dot">→</span> 产品出去</p>
         <div class="hero-cta-group">
-          <a href="#contact" class="hero-cta hero-cta--primary">直接聊 →</a>
+          <a href="#contact" class="hero-cta hero-cta--primary">有 idea？来聊 →</a>
         </div>
       </div>
 
@@ -2044,9 +2096,9 @@
           <img src="images/ip.png" alt="SupersupErChik" width="380" height="380">
         </div>
         <div class="hero-stats">
-          <span>12+</span> 技术栈
-          <span>5</span> 精选项目
-          <span>∞</span> 好奇心
+          <span>12+</span> 技术玩具
+          <span>5</span> 在跑产品
+          <span>∞</span> 待验证脑洞
         </div>
       </div>
       <div class="scroll-hint">
@@ -2064,124 +2116,40 @@
       <h2 class="section-title reveal">ABOUT</h2>
 
       <div class="about-professional reveal">
-        <p>帮创业者把产品落地——从零搭建或烂尾接手，一周内上线：<span style="color:var(--green);">海外 SaaS</span> · <span style="color:var(--amber);">Uniapp 小程序</span> · <span style="color:var(--cyan);">微信 H5 传播页</span>。</p>
-        <p>所有外包平台都在帮你找开发者——我是帮你<em style="font-style:normal;color:var(--amber);">收拾烂摊子</em>的。</p>
-        <p style="color:var(--amber); font-weight:600;">如果你脑子里天天蹦 idea 但代码无能——或者外包被坑了、项目烂尾了不知道怎么收场——</p>
-        <p style="color:var(--text-hi); font-weight:600;">这里就是给你的。</p>
+        <p>把想法变成产品——<span style="color:var(--green);">2 天一个 MVP</span>。</p>
+        <p>海外 SaaS · Uniapp 小程序 · 微信 H5。</p>
+        <p style="color:var(--text-hi); font-weight:600;">脑子里天天蹦 idea，就差一个人帮你把链接点开？</p>
+        <p style="color:var(--amber); font-weight:600;">来对地方了。</p>
       </div>
 
       <div class="about-story-toggle reveal" id="aboutStoryToggle">
-        <span class="toggle-text">了解更多关于我的故事 ↓</span>
+        <span class="toggle-text">看看这个人都折腾过什么 ↓</span>
         <span class="toggle-icon">+</span>
       </div>
 
       <div class="about-text about-story-collapsed" id="aboutStory">
-          <em>Mallo,world!</em><br>
-          重生之我在2026年学编程——<br>
-          上一世的我死磕算法题,手搓数据库，深耕Springboot架构，生撕面试场景500题，身边同学顶不住压力纷纷转行，唯有我苦苦坚守传统编程最后的净土<br>
-          终于，在毕业季同龄人遗憾斩获大厂offer或国企铁饭碗,还在为自己考研上岸而追悔莫及的时候，我没能熬过上一个冬天，早早冻死了<br>
-          不是浪漫的猝死——就是那种：投了三百份简历、面了八轮、薪资越卷越低、身体越熬越垮、最后简历过期、存款归零、暖气费交不起的——quietly dead in a rented room 式的死法<br>
-          重活一世，看着还在图书馆把头发薅秃的同学们，我悟了：2026年，手敲代码之人跟m没区别，我的选择是顷刻投入vibe coding的海洋，通过数字产品赚到我的第一桶金，然后出任CEO迎娶白富美走上人生巅峰!<br>
-          我拍了拍还在背诵前端八股文的兄弟，心中暗道：<br>
-          <em>人工智障</em>式开发，不香吗？<br>
-          都是同龄人我原本没想酱味大鸡！<br>
-
+          <em>Mallo, world!</em><br>
+          重生之我在 2026 年学编程——<br>
+          上一世，死磕算法、手搓数据库、坚守传统编程最后的净土。然后在毕业季冻死了——简历三百份、面试八轮、暖气费交不起的那种 quietly dead。<br>
+          重活一世，看着还在背八股文的同学，我悟了：<br>
+          <em>2026 年，AI 能写 90% 的代码。剩下 10%——想清楚做什么，告诉 AI。</em><br>
+          三个月，五个产品上线。从"投哪家公司"变成"今天做什么产品"。<br>
+          <em>Vibe Coding，不香吗？</em><br>
           <br>
-          跟92硕博竞争？百万人过独木桥？<br>
-          而我的选择是—— <br>
-          <em>他强任他强，我直接内置星星工作流</em><br>
+          百万人过独木桥？<br>
+          <em>他强任他强，我有星星工作流。</em><br>
           <br>
-
-          海外SaaS  |  Uniapp(小程序)  |  Web搭建  |  微信H5or验证页<br>
-          <em>这里是我们的未来</em><br>
-          <span class="note">如果你脑子里也天天蹦 idea 但代码无能 /或者你是技术大牛却"贫瘠潦倒"找不到分发出口<br>诚邀您看下去———</span>
+          海外 SaaS  |  Uniapp 小程序  |  Web 搭建  |  微信 H5<br>
+          <em>这代人的赛道。</em><br>
+          <span class="note">脑子里天天蹦 idea 但代码无能？技术大牛找不到想做的事？<br>诚邀你看下去。</span>
       </div>
-      </div>
-    </section>
-
-    <!-- ===== SERVICES ===== -->
-    <section id="services" class="section">
-      <div class="block-grid" style="margin-bottom:0.6rem;">
-        <div class="block-num reveal">/02</div>
-        <div></div>
-      </div>
-      <h2 class="section-title reveal">SERVICES</h2>
-
-      <div class="svc-grid reveal">
-
-        <!-- BUILD -->
-        <article class="svc-card svc-card--build">
-          <div class="svc-header">
-            <div class="svc-icon">&#x1F6E0;&#xFE0F;</div>
-            <h3 class="svc-name">BUILD · 帮你做</h3>
-            <p class="svc-tagline">你有产品想法，我帮你快速落地——平均 2 天交付 MVP。外包项目烂尾了？我来接手重建，两周内让它上线。</p>
-          </div>
-          <div class="svc-body">
-            <div class="svc-section-label">承接范围</div>
-            <div class="svc-tags">
-              <span class="svc-tag">海外 SaaS</span>
-              <span class="svc-tag">Uniapp 小程序</span>
-              <span class="svc-tag">微信 H5 传播页</span>
-            </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">有产品想法但缺技术实现的创业者 · 需要快速验证的小团队 · <em style="font-style:normal;color:var(--amber);">外包被坑、项目烂尾了？我来接手重建</em></p>
-            <div class="svc-section-label">流程</div>
-            <p class="svc-process"><span>1</span> 需求对齐 → <span>2</span> 报价 &amp; 排期 → <span>3</span> 开发交付 → <span>4</span> 上线支持</p>
-            <a href="#contact" class="svc-cta" data-svc="build">外包项目出问题了？免费诊断 →</a>
-          </div>
-        </article>
-
-        <!-- LEARN -->
-        <article class="svc-card svc-card--learn">
-          <div class="svc-header">
-            <div class="svc-icon">&#x1F393;</div>
-            <h3 class="svc-name">LEARN · 教你做</h3>
-            <p class="svc-tagline">不是录播课——是 1v1 项目陪跑。用你的真实项目做教材，我把踩过的坑直接告诉你。没有"包教包会"，只有"边做边学"。</p>
-          </div>
-          <div class="svc-body">
-            <div class="svc-section-label">教学方向</div>
-            <div class="svc-tags">
-              <span class="svc-tag">Vibecoding 入门</span>
-              <span class="svc-tag">小程序实战</span>
-              <span class="svc-tag">SaaS 从 0 到 1</span>
-            </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">脑子里天天蹦 idea 但代码无能 · 想做独立开发者但缺实战反馈 · 想用 AI 提效而非从零学编程</p>
-            <div class="svc-section-label">教学方式</div>
-            <p class="svc-process"><span>真实项目驱动</span> · <span>1v1 陪跑反馈</span> · <span>踩坑经验直接给</span></p>
-            <a href="#contact" class="svc-cta" data-svc="learn">了解教学计划 →</a>
-          </div>
-        </article>
-
-        <!-- CONSULT -->
-        <article class="svc-card svc-card--consult">
-          <div class="svc-header">
-            <div class="svc-icon">&#x1F4AC;</div>
-            <h3 class="svc-name">CONSULT · 帮你想</h3>
-            <p class="svc-tagline">你有困惑，我帮你理清方向。产品 / 技术 / 职业——都可以聊。</p>
-          </div>
-          <div class="svc-body">
-            <div class="svc-section-label">咨询方向</div>
-            <div class="svc-tags">
-              <span class="svc-tag">大学生规划</span>
-              <span class="svc-tag">产品需求验证</span>
-              <span class="svc-tag">独立开发者转型</span>
-            </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">迷茫中的学生 · 想验证 idea 的创业者 · 在转型期的程序员</p>
-            <div class="svc-section-label">流程</div>
-            <p class="svc-process"><span>1</span> 预约时间 → <span>2</span> 提交背景 → <span>3</span> 深度对话 → <span>4</span> 行动清单</p>
-            <a href="#contact" class="svc-cta" data-svc="consult">预约咨询 →</a>
-          </div>
-        </article>
-
       </div>
     </section>
 
     <!-- ===== PROJECTS ===== -->
     <section id="work" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
-        <div class="block-num reveal">/03</div>
+        <div class="block-num reveal">/02</div>
         <div></div>
       </div>
       <h2 class="section-title reveal">PROJECTS</h2>
@@ -2201,7 +2169,7 @@
           <span class="proj-title">Panora</span>
           <span class="proj-stack"><span>TypeScript</span><span>Next.js</span><span>YouTube 、X API</span><span>OAuth</span></span>
           <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">海外 SaaS 标杆：YouTube / X OAuth 登录 → 跨平台数据看板。Next.js 全栈 + 订阅制变现架构。</span>
+          <span class="proj-desc">YouTube / X OAuth → 跨平台数据看板。Next.js 全栈 + 订阅制变现。</span>
         </a>
 
         <!-- 🥇 金级 -->
@@ -2210,7 +2178,7 @@
           <span class="proj-title">地球Online评分测试</span>
           <span class="proj-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>html2canvas</span><span>H5裂变</span></span>
           <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">微信 H5 裂变标杆：赛博系统 × 杂志拼贴风，24 题测试 + 社交分享生成。验证 H5 传播获客模型。</span>
+          <span class="proj-desc">赛博系统 × 杂志拼贴风，24 题测试 + 社交分享。H5 裂变获客验证。</span>
         </a>
 
         <!-- 🥈 银级 -->
@@ -2219,7 +2187,7 @@
           <span class="proj-title">CFomatting Word</span>
           <span class="proj-stack"><span>Python</span><span>FastAPI</span><span>python-docx</span></span>
           <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">实用工具：上传 Word 范本 + AI 生成内容 → 自动排版输出 .docx。Python FastAPI + python-docx，解决大学生排版痛点。</span>
+          <span class="proj-desc">上传 Word 范本 + AI 内容 → 自动排版输出 .docx。解决大学生排版噩梦。</span>
         </a>
 
         <a class="proj-row" href="https://gomoku-ai-9g7.pages.dev" target="_blank" rel="noopener">
@@ -2227,7 +2195,7 @@
           <span class="proj-title">AiChess</span>
           <span class="proj-stack"><span>JavaScript</span><span>Canvas 2D</span><span>α-β 剪枝</span><span>Zobrist 哈希</span></span>
           <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">算法向：五子棋 AI 对弈。α-β 剪枝 + Zobrist 哈希 + 迭代加深 + Canvas 2D 渲染。</span>
+          <span class="proj-desc">五子棋 AI 对弈。α-β 剪枝 + Zobrist 哈希 + Canvas 2D。</span>
         </a>
 
         <a class="proj-row" href="https://light-admin.pages.dev" target="_blank" rel="noopener">
@@ -2235,8 +2203,87 @@
           <span class="proj-title">Vue Admin System</span>
           <span class="proj-stack"><span>Vue 3</span><span>TypeScript</span><span>Vite</span><span>Pinia</span><span>Element Plus</span></span>
           <span class="proj-arrow">&rarr;</span>
-          <span class="proj-desc">Vue 3 全栈后台管理系统模板。权限控制 / 动态路由 / 数据表格 / 仪表盘图表 —— 后台高频场景全覆盖。项目已开源！</span>
+          <span class="proj-desc">权限控制 / 动态路由 / 数据表格 / 仪表盘。后台高频场景全覆盖。已开源。</span>
         </a>
+
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" class="section">
+      <div class="block-grid" style="margin-bottom:0.6rem;">
+        <div class="block-num reveal">/03</div>
+        <div></div>
+      </div>
+      <h2 class="section-title reveal">SERVICES</h2>
+
+      <div class="svc-grid reveal">
+
+        <!-- BUILD -->
+        <article class="svc-card svc-card--build">
+          <div class="svc-header">
+            <div class="svc-icon">&#x1F6E0;&#xFE0F;</div>
+            <h3 class="svc-name">BUILD · 帮你做</h3>
+            <p class="svc-tagline">你的想法 + 我的工具链 = 快速上线。烂尾项目？我的专长。</p>
+          </div>
+          <div class="svc-body">
+            <div class="svc-section-label">承接范围</div>
+            <div class="svc-tags">
+              <span class="svc-tag">海外 SaaS</span>
+              <span class="svc-tag">Uniapp 小程序</span>
+              <span class="svc-tag">微信 H5 传播页</span>
+            </div>
+            <div class="svc-section-label">适合谁</div>
+            <p class="svc-fit">有 idea 缺实现 · 项目卡住了 · 需要一个人形 Copilot</p>
+            <div class="svc-section-label">流程</div>
+            <p class="svc-process"><span>1</span> 需求对齐 → <span>2</span> 报价 &amp; 排期 → <span>3</span> 开发交付 → <span>4</span> 上线支持</p>
+            <a href="#contact" class="svc-cta" data-svc="build">有想法？来聊聊 →</a>
+          </div>
+        </article>
+
+        <!-- LEARN -->
+        <article class="svc-card svc-card--learn">
+          <div class="svc-header">
+            <div class="svc-icon">&#x1F393;</div>
+            <h3 class="svc-name">LEARN · 教你做</h3>
+            <p class="svc-tagline">1v1 带你用 AI 做你自己的产品。教材就是你的项目。</p>
+          </div>
+          <div class="svc-body">
+            <div class="svc-section-label">教学方向</div>
+            <div class="svc-tags">
+              <span class="svc-tag">Vibe Coding 入门</span>
+              <span class="svc-tag">小程序实战</span>
+              <span class="svc-tag">SaaS 从 0 到 1</span>
+            </div>
+            <div class="svc-section-label">适合谁</div>
+            <p class="svc-fit">想动手不知道怎么开始 · 用 AI 产出差口气 · 想做独立开发没人带</p>
+            <div class="svc-section-label">教学方式</div>
+            <p class="svc-process"><span>真实项目驱动</span> · <span>1v1 陪跑反馈</span> · <span>踩坑经验直接给</span></p>
+            <a href="#contact" class="svc-cta" data-svc="learn">了解教学计划 →</a>
+          </div>
+        </article>
+
+        <!-- CONSULT -->
+        <article class="svc-card svc-card--consult">
+          <div class="svc-header">
+            <div class="svc-icon">&#x1F4AC;</div>
+            <h3 class="svc-name">CONSULT · 帮你想</h3>
+            <p class="svc-tagline">一次对话，乱麻理成线。产品方向 / 技术选型 / 职业困惑。</p>
+          </div>
+          <div class="svc-body">
+            <div class="svc-section-label">咨询方向</div>
+            <div class="svc-tags">
+              <span class="svc-tag">大学生规划</span>
+              <span class="svc-tag">产品需求验证</span>
+              <span class="svc-tag">独立开发者转型</span>
+            </div>
+            <div class="svc-section-label">适合谁</div>
+            <p class="svc-fit">迷茫的学生 · 想法太多的创业者 · 想转型的程序员</p>
+            <div class="svc-section-label">流程</div>
+            <p class="svc-process"><span>1</span> 预约时间 → <span>2</span> 提交背景 → <span>3</span> 深度对话 → <span>4</span> 行动清单</p>
+            <a href="#contact" class="svc-cta" data-svc="consult">预约咨询 →</a>
+          </div>
+        </article>
 
       </div>
     </section>
@@ -2250,8 +2297,8 @@
 
       <h2 class="section-title reveal">⭐ 星星工作流</h2>
       <p class="reveal" style="font-family:var(--font-mono);font-size:var(--sz-xs);color:var(--text-dim);margin-bottom:1.5rem;max-width:600px;line-height:1.6;">
-        一键让Agent给你干到死——<br>
-        GITHUBstars第一的工作流<span style="color:var(--green-dim);">/命令</span>封装，硅谷顶级开发者的产品心经，输入即启动
+        五个 <span style="color:var(--green-dim);">/命令</span>，从想法到上线一口气跑完。<br>
+        AI 不替你思考——替你<em>执行</em>。GitHub Stars 第一的工作流封装。
       </p>
 
       <!-- 审讯式PRD 说明卡片 -->
@@ -2260,11 +2307,11 @@
           <span class="wf-infobox-prompt">$</span>
           <span>man 审讯式PRD</span>
         </div>
-        <p class="wf-infobox-desc">Agent 不会直接接受你的第一描述。它会像审讯官一样连续追问，把每个模糊点变成精准定义——这就是「审讯式拷打」。</p>
+        <p class="wf-infobox-desc">Agent 不会直接接受你的第一描述。它会像审讯官一样追问，把模糊点变成精准定义。</p>
         <div class="wf-infobox-points">
           <span>每个回答 → 术语定义沉淀 (CONTEXT.md)</span>
           <span>每个决策 → 架构记录留档 (docs/adr/)</span>
-          <span>最终产出 → 精准PRD + 完整边界声明</span>
+          <span>最终产出 → 精准 PRD + 完整边界声明</span>
         </div>
       </div>
 
@@ -2327,7 +2374,7 @@
 
         <!-- CTA -->
         <a class="wf-cta" href="#contact">
-          <span>联系我以获取完整 CLAUDE.md</span>
+          <span>想拿到完整 CLAUDE.md？联系我</span>
           <span class="cta-arrow">&rarr;</span>
         </a>
 
@@ -2342,7 +2389,7 @@
       </div>
       <h2 class="section-title reveal">SKILLLIST</h2>
       <p class="reveal" style="font-family:var(--font-mono);font-size:var(--sz-xs);color:var(--text-dim);margin-bottom:1rem;max-width:600px;line-height:1.6;">
-        我的 Claude Code 技能库——20 项 Agent 能力，覆盖从需求到部署的全流程。
+        20 项 Agent 能力，覆盖需求到部署。日常在用的，不是 demo。
       </p>
 
       <!-- 📱 移动端：可点击展开卡片（PC 端隐藏） -->
@@ -2561,6 +2608,7 @@
         <button class="contact-tab active" data-tab="build">BUILD · 帮你做</button>
         <button class="contact-tab" data-tab="learn">LEARN · 教你做</button>
         <button class="contact-tab" data-tab="consult">CONSULT · 帮你想</button>
+        <button class="contact-tab" data-tab="join">JOIN · 加入我们</button>
       </div>
 
       <div class="contact-layout reveal">
@@ -2577,9 +2625,9 @@
           <label>联系方式（微信 / 邮箱）</label>
           <input type="text" name="contact" placeholder="微信或邮箱，方便我联系你" required>
           <label>项目描述</label>
-          <textarea name="project" placeholder="新项目：海外SaaS / 小程序 / H5传播页？还是烂尾接手：原项目卡在哪了？目标用户是谁？" required></textarea>
+          <textarea name="project" placeholder="海外 SaaS / 小程序 / H5？还是烂尾接手？目标用户？卡在哪？" required></textarea>
           <label>预算范围</label>
-          <input type="text" name="budget" placeholder="填写您内心对于项目的预算范围，或"聊聊再说"">
+          <input type="text" name="budget" placeholder="填个范围，或"聊聊再说"">
           <button type="submit" class="form-submit">发送需求 →</button>
         </form>
       </div>
@@ -2587,7 +2635,7 @@
       <!-- LEARN form -->
       <div class="contact-form-panel reveal" id="panel-learn">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
-          告诉我你的基础和想学的方向——我来定制教学计划。
+          你现在什么水平？想做什么方向？——我来定制 1v1 计划。
         </p>
         <form class="contact-form" data-type="LEARN">
           <label>你的名字</label>
@@ -2596,13 +2644,13 @@
           <input type="text" name="contact" placeholder="微信或邮箱" required>
           <label>当前基础</label>
           <select name="level">
-            <option value="">你的编程基础？</option>
-            <option value="零基础">零基础，完全没写过代码</option>
-            <option value="略懂">略懂一点，会用 AI 工具但不会自己改</option>
-            <option value="会写">会写代码，想学 Vibe Coding 提效</option>
+            <option value="">你现在什么水平？</option>
+            <option value="零基础">零基础——但脑子里有想做的产品</option>
+            <option value="略懂">略懂一点——用 AI 写过东西但总差点意思</option>
+            <option value="会写">会写代码——想学怎么让 AI 替你写</option>
           </select>
           <label>想学什么 / 目标产品</label>
-          <textarea name="goal" placeholder="想做什么方向的产品？小程序？SaaS？多久能投入时间？" required></textarea>
+          <textarea name="goal" placeholder="想做什么方向的产品？小程序？SaaS？每周能投入多少时间？" required></textarea>
           <button type="submit" class="form-submit">发送咨询 →</button>
         </form>
       </div>
@@ -2610,7 +2658,7 @@
       <!-- CONSULT form -->
       <div class="contact-form-panel reveal" id="panel-consult">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
-          告诉我你的困惑和背景——我会在 24h 内确认咨询时间。
+          你的困惑和背景——24h 内确认时间。一次对话，省一个月弯路。
         </p>
         <form class="contact-form" data-type="CONSULT">
           <label>你的名字</label>
@@ -2629,6 +2677,36 @@
           <textarea name="context" placeholder="简单介绍你的情况，越具体越好——这样咨询时可以直接进入正题。" required></textarea>
           <button type="submit" class="form-submit">预约咨询 →</button>
         </form>
+      </div>
+
+      <!-- JOIN form -->
+      <div class="contact-form-panel" id="panel-join">
+        <div class="join-invite">
+          <p class="join-invite-headline">这个工坊只有一个人。想当第二个吗？</p>
+          <div class="join-invite-body">
+            <p>我在找这样的人：</p>
+            <ul>
+              <li>有<em>自己想做的产品</em>——不是等需求，是"非做不可"</li>
+              <li>前端能写（React / Vue / Next.js），全栈加分</li>
+              <li>有独立项目在跑——半成品也比"想做还没开始"强</li>
+              <li>对 AI 工具有好奇心——<em>"让我试试它能不能做 xx"</em>的那种</li>
+            </ul>
+            <p class="join-invite-close">如果这是在说你——<strong>留下微信和作品，直接聊。</strong>不是面试，是看看能不能一起搞点东西。</p>
+          </div>
+        </div>
+        <form class="contact-form" data-type="JOIN">
+          <label>你的名字</label>
+          <input type="text" name="name" placeholder="怎么称呼？" required>
+          <label>微信号</label>
+          <input type="text" name="wechat" placeholder="留下微信号，我加你" required>
+          <label>项目地址 / 简历链接</label>
+          <input type="url" name="portfolio" placeholder="GitHub · 线上项目 · 作品集 · 简历链接都可以" required>
+          <label>为什么想加入？（可选）</label>
+          <textarea name="why" placeholder="简单说说你在做什么、想做什么——越具体越好。一句话也行。"></textarea>
+          <button type="submit" class="form-submit">发送申请 →</button>
+        </form>
+      </div>
+
         </div><!-- /contact-form-area -->
 
         <!-- Right: 联系方式 + 信任信号 -->
@@ -2661,8 +2739,8 @@
 
     <nav class="mob-nav">
       <a href="#about">关于</a>
-      <a href="#services">服务</a>
       <a href="#work">项目</a>
+      <a href="#services">服务</a>
       <a href="#contact">联系</a>
     </nav>
 
@@ -2775,6 +2853,8 @@
         document.querySelector('[data-tab="learn"]').click();
       } else if (hash === '#consult') {
         document.querySelector('[data-tab="consult"]').click();
+      } else if (hash === '#join') {
+        document.querySelector('[data-tab="join"]').click();
       }
     })();
 
@@ -2807,7 +2887,7 @@
         if (expanded) {
           toggle.classList.remove('expanded');
           story.classList.remove('expanded');
-          toggle.querySelector('.toggle-text').textContent = '了解更多关于我的故事 ↓';
+          toggle.querySelector('.toggle-text').textContent = '看看这个人都折腾过什么 ↓';
         } else {
           toggle.classList.add('expanded');
           story.classList.add('expanded');
@@ -2847,7 +2927,8 @@
           var lines = ['📬 **新咨询 · ' + type + '**', ''];
           var labels = {
             name: '名字', contact: '联系方式', project: '项目描述', budget: '预算',
-            level: '当前基础', goal: '想学什么', topic: '咨询方向', context: '背景说明'
+            level: '当前基础', goal: '想学什么', topic: '咨询方向', context: '背景说明',
+            wechat: '微信号', portfolio: '项目/简历', why: '为什么想加入'
           };
           Object.keys(fields).forEach(function(k) {
             if (fields[k]) lines.push((labels[k] || k) + '：' + fields[k]);
