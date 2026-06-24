@@ -15,19 +15,30 @@
 
   <style>
     :root {
-      --bg:        #0d0d0d;
-      --bg-alt:    #121212;
-      --text:      #b0b0b0;
-      --text-dim:  #5c5c5c;
-      --text-hi:   #e8e8e8;
-      --green:     #4faf4f;
-      --green-dim: #2a5a2a;
-      --amber:     #d7af5f;
-      --amber-dim: #7a652f;
-      --blue:      #5f87af;
-      --cyan:      #5fafaf;
-      --red:       #af5f5f;
-      --border:    #1f1f1f;
+      /* ── 小鸡风格色彩系统：暖白底 + 明黄强调 ── */
+      --bg:        #FFFEF7;   /* 暖白底，微偏黄 */
+      --bg-alt:    #F5F2E8;   /* 浅米灰卡片底 */
+      --text:      #4a4a4a;   /* 正文灰 */
+      --text-dim:  #969696;   /* 辅助文字 */
+      --text-mid:  #6e6e6e;   /* 中间灰 */
+      --text-hi:   #1a1a1a;   /* 标题黑 */
+      --yellow:    #F5C400;   /* 主强调：明黄 */
+      --yellow-dim:#FFF0B3;   /* 黄底浅色 */
+      --amber:     #E89800;   /* 第二强调：暖橙金 */
+      --amber-dim: #FFF3D6;   /* 橙底浅色 */
+      --blue:      #4A90D9;   /* 链接蓝 */
+      --cyan:      #3DA5A5;   /* 青绿 */
+      --red:       #D94A4A;   /* 错误红 */
+      --border:    #E5E0D5;   /* 浅灰边框 */
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-md: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 24px rgba(0,0,0,0.08);
+
+      /* ── 圆角系统 ── */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 999px;
 
       --font-display: 'Syne', sans-serif;
       --font-mono:    'JetBrains Mono', monospace;
@@ -61,14 +72,6 @@
       -webkit-overflow-scrolling: touch; /* iOS 惯性滚动 */
     }
 
-    /* scanline */
-    body::after {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-    }
-
     /* ===== NAV ===== */
     .nav {
       position: fixed; top: 1.2rem; right: 1.2rem; z-index: 100;
@@ -78,16 +81,17 @@
       display: flex;
       gap: 0.3rem;
       font-size: var(--sz-xs); letter-spacing: 0.08em; text-transform: uppercase;
-      background: rgba(13,13,13,0.85);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 2rem;
+      background: rgba(255,254,247,0.88);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       padding: 0.45rem 0.3rem;
+      box-shadow: var(--shadow-sm);
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
     }
     @supports (backdrop-filter: blur(12px)) {
       .nav {
-        background: rgba(13,13,13,0.7);
+        background: rgba(255,254,247,0.72);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
       }
@@ -98,7 +102,7 @@
       padding: 0.35rem 0.9rem;
       border-radius: 1.5rem;
     }
-    .nav a:hover { color: var(--green); background: rgba(79,175,79,0.08); }
+    .nav a:hover { color: var(--yellow); background: rgba(245,196,0,0.14); }
     .nav a::after { display: none; }
 
     /* ===== MOBILE BOTTOM NAV ===== */
@@ -115,16 +119,16 @@
         transform: translateX(-50%) translateZ(0);
         -webkit-transform: translateX(-50%) translateZ(0);
         z-index: 100;
-        background: rgba(13,13,13,0.95);
+        background: rgba(255,254,247,0.95);
         border: 1px solid var(--border);
-        border-radius: 2rem;
+        border-radius: var(--radius-full);
         padding: 0.35rem 0.6rem;
         gap: 0.3rem;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+        box-shadow: var(--shadow-lg);
       }
       @supports (backdrop-filter: blur(16px)) {
         .mob-nav {
-          background: rgba(13,13,13,0.85);
+          background: rgba(255,254,247,0.82);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
         }
@@ -145,8 +149,8 @@
       }
       .mob-nav a.active,
       .mob-nav a:active {
-        background: rgba(79,175,79,0.12);
-        color: var(--green);
+        background: rgba(245,196,0,0.2);
+        color: var(--amber);
       }
     }
 
@@ -195,7 +199,7 @@
       padding-bottom: 0.08em;
     }
     .hero-name .hl {
-      color: var(--green);
+      color: var(--yellow);
       font-weight: 700;
     }
 
@@ -206,27 +210,27 @@
 
     .hero-avatar-wrap {
       width: clamp(220px, 30vw, 420px);
-      border: 1px solid var(--green-dim);
+      border: 1px solid var(--yellow-dim);
+      border-radius: var(--radius-lg);
       padding: 5px;
       background: var(--bg-alt);
     }
     .hero-avatar-wrap img {
       width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
+      height: auto;
       display: block;
-      filter: grayscale(100%) contrast(1.05) brightness(0.88);
+      border-radius: calc(var(--radius-lg) - 2px);
       transition: filter 0.6s;
     }
     .hero-avatar-wrap img:hover {
-      filter: grayscale(60%) contrast(1) brightness(0.92);
+      filter: contrast(1.03) brightness(1.02);
     }
 
     .hero-stats {
       display: flex; gap: 1.5rem;
       font-size: var(--sz-sm); color: var(--text-dim);
     }
-    .hero-stats span { color: var(--green); font-weight: 700; }
+    .hero-stats span { color: var(--yellow); font-weight: 700; }
 
     .hero-positioning {
       font-family: var(--font-display);
@@ -261,20 +265,21 @@
       padding: 0.7rem 1.6rem;
       text-decoration: none;
       letter-spacing: 0.04em;
+      border-radius: var(--radius-full);
       transition: all 0.3s;
       cursor: pointer;
       min-height: 44px;
       touch-action: manipulation;
     }
     .hero-cta--primary {
-      background: var(--green);
-      color: var(--bg);
-      border: 2px solid var(--green);
+      background: var(--yellow);
+      color: #1a1a1a;
+      border: 2px solid var(--yellow);
       font-weight: 700;
     }
     .hero-cta--primary:hover {
       background: transparent;
-      color: var(--green);
+      color: var(--amber);
     }
     .hero-cta--secondary {
       background: transparent;
@@ -282,8 +287,50 @@
       border: 2px solid var(--border);
     }
     .hero-cta--secondary:hover {
-      border-color: var(--green);
-      color: var(--green);
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    /* ===== HUB CARD — 02+04 合并悬浮大卡片 ===== */
+    .hub-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 2rem 2rem 1.5rem;
+      margin: 2rem 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hub-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .hub-card .section {
+      padding: 0;
+      margin-bottom: 2.5rem;
+    }
+    .hub-card .section:last-child {
+      margin-bottom: 0;
+    }
+    /* 卡片内 section 标题精简 */
+    .hub-card .section-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .hub-card .block-grid {
+      margin-bottom: 0.3rem !important;
+    }
+    .hub-card .block-num {
+      font-size: 1.3rem;
+      top: 1rem;
+    }
+    @media (max-width: 500px) {
+      .hub-card {
+        padding: 1.2rem 0.75rem 1rem;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: var(--radius-md);
+      }
     }
 
     /* ===== SECTION ===== */
@@ -351,7 +398,7 @@
       font-family: var(--font-display);
       font-size: 1rem;
       font-weight: 700;
-      color: var(--green);
+      color: var(--yellow);
       margin: 1.5rem 0 0.5rem;
       line-height: 1.3;
     }
@@ -384,6 +431,7 @@
       font-size: var(--sz-sm);
       padding: 0.35rem 0.9rem;
       border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       color: var(--amber);
       transition: all 0.3s;
       cursor: default;
@@ -412,7 +460,7 @@
       content: '>';
       position: absolute;
       left: 0;
-      color: var(--green-dim);
+      color: var(--yellow-dim);
       font-family: var(--font-mono);
       font-size: var(--sz-xs);
     }
@@ -450,6 +498,7 @@
       color: var(--amber);
       padding: 0.55rem 1.1rem;
       border: 1px solid var(--amber-dim);
+      border-radius: var(--radius-full);
       cursor: pointer;
       letter-spacing: 0.04em;
       transition: all 0.3s;
@@ -461,7 +510,7 @@
     .about-story-toggle:hover {
       border-color: var(--amber);
       color: var(--amber);
-      background: rgba(215,175,95,0.06);
+      background: rgba(232,152,0,0.1);
     }
     .about-story-toggle .toggle-icon {
       display: inline-block;
@@ -493,14 +542,15 @@
       font-size: var(--sz-md);
       padding: 0.6rem 1.3rem;
       border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       color: var(--text);
       letter-spacing: 0.04em;
       transition: all 0.3s;
       cursor: default;
     }
     .skills-scatter .tag:hover {
-      border-color: var(--green);
-      color: var(--green);
+      border-color: var(--yellow);
+      color: var(--yellow);
       transform: translateY(-2px);
     }
     /* staggered offsets */
@@ -521,6 +571,8 @@
     .proj-table {
       width: 100%;
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
       font-family: var(--font-mono);
       font-size: var(--sz-sm);
     }
@@ -529,7 +581,7 @@
       grid-template-columns: 40px 1fr 2fr 40px;
       padding: 0.55rem 1.2rem;
       border-bottom: 1px solid var(--border);
-      color: var(--green-dim);
+      color: var(--yellow-dim);
       font-size: var(--sz-xs);
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -546,15 +598,15 @@
     }
     .proj-row:last-child { border-bottom: none; }
     .proj-row:hover {
-      background: rgba(79, 175, 79, 0.04);
+      background: rgba(245, 196, 0, 0.04);
       color: var(--text-hi);
     }
-    .proj-row:hover .proj-arrow { color: var(--green); }
+    .proj-row:hover .proj-arrow { color: var(--yellow); }
     .proj-idx {
       color: var(--text-dim);
       font-size: var(--sz-xs);
     }
-    .proj-row:hover .proj-idx { color: var(--green); }
+    .proj-row:hover .proj-idx { color: var(--yellow); }
     .proj-title {
       font-weight: 700;
       color: var(--text-hi);
@@ -611,6 +663,8 @@
     .skill-table {
       width: 100%;
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
       font-family: var(--font-mono);
       font-size: var(--sz-sm);
     }
@@ -635,7 +689,7 @@
     }
     .skill-row:last-child { border-bottom: none; }
     .skill-row:hover {
-      background: rgba(79, 175, 79, 0.04);
+      background: rgba(245, 196, 0, 0.04);
       color: var(--text-hi);
     }
     .skill-row:hover .skill-name { color: var(--text-hi); }
@@ -693,10 +747,10 @@
     }
     /* 铜级：左侧微弱的绿色线 */
     .skill-row--bronze {
-      border-left: 3px solid var(--green-dim);
+      border-left: 3px solid var(--yellow-dim);
     }
     .skill-row--bronze .skill-tier {
-      color: var(--green-dim);
+      color: var(--yellow-dim);
     }
 
     /* 表格底部 CTA 行 */
@@ -713,12 +767,12 @@
       text-decoration: none;
     }
     .skill-row--cta:hover {
-      background: rgba(79, 175, 79, 0.04);
+      background: rgba(245, 196, 0, 0.04);
       color: var(--text-hi);
-      border-top-color: var(--green-dim);
+      border-top-color: var(--yellow-dim);
     }
     .skill-row--cta .cta-prefix {
-      color: var(--green-dim);
+      color: var(--yellow-dim);
       margin-right: 0.5rem;
     }
     .skill-row--cta .cta-text {
@@ -726,7 +780,7 @@
       transition: color 0.3s;
     }
     .skill-row--cta:hover .cta-text {
-      color: var(--green);
+      color: var(--yellow);
     }
     .skill-row--cta .cta-arrow {
       float: right;
@@ -734,7 +788,7 @@
       transition: all 0.3s;
     }
     .skill-row--cta:hover .cta-arrow {
-      color: var(--green);
+      color: var(--yellow);
       transform: translateX(3px);
     }
 
@@ -763,10 +817,13 @@
       .skill-mobile-card {
         display: block;
         position: relative;
-        border: 1px solid rgba(215, 175, 95, 0.25);
+        border: 1px solid rgba(232, 152, 0, 0.25);
+        border-radius: var(--radius-md);
+        overflow: hidden;
         background:
-          linear-gradient(175deg, rgba(215, 175, 95, 0.04) 0%, transparent 40%),
+          linear-gradient(175deg, rgba(232, 152, 0, 0.04) 0%, transparent 40%),
           var(--bg-alt);
+        box-shadow: var(--shadow-sm);
       }
 
       /* 左上角装饰括号 */
@@ -799,8 +856,8 @@
         font-size: var(--sz-xs);
         padding: 0.55rem 1rem;
         letter-spacing: 0.07em;
-        border-bottom: 1px solid rgba(215, 175, 95, 0.12);
-        background: rgba(215, 175, 95, 0.04);
+        border-bottom: 1px solid rgba(232, 152, 0, 0.12);
+        background: rgba(232, 152, 0, 0.04);
         color: var(--amber);
         display: flex;
         align-items: center;
@@ -844,7 +901,7 @@
         content: '';
         flex: 1;
         height: 1px;
-        background: rgba(215, 175, 95, 0.12);
+        background: rgba(232, 152, 0, 0.12);
       }
 
       /* ---- 金级技能列表：交错入场 ---- */
@@ -856,7 +913,7 @@
 
       .skill-mobile-gold-item {
         padding: 0.55rem 0.7rem;
-        background: rgba(215, 175, 95, 0.025);
+        background: rgba(232, 152, 0, 0.025);
         border-left: 2px solid var(--amber-dim);
         position: relative;
         animation: skill-item-slide 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -925,8 +982,9 @@
         font-size: 0.76rem;
         color: var(--text);
         background:
-          linear-gradient(180deg, rgba(79, 175, 79, 0.03) 0%, transparent 100%);
+          linear-gradient(180deg, rgba(245, 196, 0, 0.06) 0%, transparent 100%);
         border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
         cursor: pointer;
         letter-spacing: 0.06em;
         transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease;
@@ -946,7 +1004,7 @@
         background: linear-gradient(
           180deg,
           transparent 0%,
-          rgba(79, 175, 79, 0.06) 50%,
+          rgba(245, 196, 0, 0.06) 50%,
           transparent 100%
         );
         transform: translateY(-100%);
@@ -955,9 +1013,9 @@
       }
 
       .skill-expand-btn:active {
-        border-color: var(--green);
-        color: var(--green);
-        background: rgba(79, 175, 79, 0.06);
+        border-color: var(--yellow);
+        color: var(--yellow);
+        background: rgba(245, 196, 0, 0.06);
       }
 
       .skill-expand-btn:active::after {
@@ -982,7 +1040,8 @@
         gap: 0.4rem;
         padding-top: 0.6rem;
         margin-top: 0.2rem;
-        border-top: 1px dashed rgba(255, 255, 255, 0.06);
+        border-top: 1px dashed var(--border);
+        border-radius: 0 0 var(--radius-md) var(--radius-md);
         font-family: var(--font-mono);
         font-size: 0.66rem;
         color: var(--text-dim);
@@ -993,10 +1052,10 @@
         touch-action: manipulation;
       }
       .skill-mobile-cta:active {
-        color: var(--green);
+        color: var(--yellow);
       }
       .skill-mobile-cta .cta-prefix {
-        color: var(--green-dim);
+        color: var(--yellow-dim);
       }
       .skill-mobile-cta .cta-arrow {
         display: inline-block;
@@ -1004,7 +1063,7 @@
       }
       .skill-mobile-cta:active .cta-arrow {
         transform: translateX(3px);
-        color: var(--green);
+        color: var(--yellow);
       }
 
     }
@@ -1019,16 +1078,18 @@
 
     .svc-card {
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
       background: var(--bg-alt);
       display: flex;
       flex-direction: column;
-      transition: border-color 0.4s, transform 0.3s;
+      transition: border-color 0.4s, transform 0.3s, box-shadow 0.3s;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
-    .svc-card:hover { transform: translateY(-4px); }
+    .svc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
-    .svc-card--build { border-top: 3px solid var(--green); }
-    .svc-card--build:hover { border-color: var(--green); }
+    .svc-card--build { border-top: 3px solid var(--yellow); }
+    .svc-card--build:hover { border-color: var(--yellow); }
     .svc-card--learn { border-top: 3px solid var(--amber); }
     .svc-card--learn:hover { border-color: var(--amber); }
     .svc-card--consult { border-top: 3px solid var(--cyan); }
@@ -1049,7 +1110,7 @@
       color: var(--text-hi);
       margin-bottom: 0.3rem;
     }
-    .svc-card--build .svc-name { color: var(--green); }
+    .svc-card--build .svc-name { color: var(--yellow); }
     .svc-card--learn .svc-name { color: var(--amber); }
     .svc-card--consult .svc-name { color: var(--cyan); }
 
@@ -1089,11 +1150,12 @@
       font-size: var(--sz-xs);
       padding: 0.25rem 0.6rem;
       border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       color: var(--text-dim);
       letter-spacing: 0.03em;
     }
-    .svc-card--build .svc-tag { border-color: rgba(79,175,79,0.3); color: var(--green); }
-    .svc-card--learn .svc-tag { border-color: rgba(215,175,95,0.3); color: var(--amber); }
+    .svc-card--build .svc-tag { border-color: rgba(245,196,0,0.3); color: var(--yellow); }
+    .svc-card--learn .svc-tag { border-color: rgba(232,152,0,0.3); color: var(--amber); }
     .svc-card--consult .svc-tag { border-color: rgba(95,175,175,0.3); color: var(--cyan); }
 
     .svc-fit {
@@ -1110,7 +1172,7 @@
       line-height: 1.6;
     }
     .svc-process span { color: var(--text-dim); }
-    .svc-card--build .svc-process span { color: var(--green-dim); }
+    .svc-card--build .svc-process span { color: var(--yellow-dim); }
     .svc-card--learn .svc-process span { color: var(--amber-dim); }
     .svc-card--consult .svc-process span { color: var(--cyan); opacity: 0.6; }
 
@@ -1124,6 +1186,7 @@
       color: var(--text-dim);
       text-decoration: none;
       border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       padding: 0.65rem 1.2rem;
       transition: all 0.3s;
       cursor: pointer;
@@ -1133,8 +1196,8 @@
       margin-top: auto;
       align-self: flex-start;
     }
-    .svc-card--build .svc-cta:hover { border-color: var(--green); color: var(--green); background: rgba(79,175,79,0.06); }
-    .svc-card--learn .svc-cta:hover { border-color: var(--amber); color: var(--amber); background: rgba(215,175,95,0.06); }
+    .svc-card--build .svc-cta:hover { border-color: var(--yellow); color: var(--yellow); background: rgba(245,196,0,0.06); }
+    .svc-card--learn .svc-cta:hover { border-color: var(--amber); color: var(--amber); background: rgba(232,152,0,0.06); }
     .svc-card--consult .svc-cta:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(95,175,175,0.06); }
 
     /* Services responsive */
@@ -1156,7 +1219,7 @@
       font-size: var(--sz-huge); font-weight: 700;
       color: var(--text-hi); line-height: 1.1;
     }
-    .contact-big span { color: var(--green); }
+    .contact-big span { color: var(--yellow); }
     .contact-lines {
       display: flex; flex-direction: column; gap: 0;
       padding-top: 0.5rem;
@@ -1166,7 +1229,7 @@
       padding: 0.9rem 0; border-bottom: 1px solid var(--border);
       transition: border-color 0.3s;
     }
-    .contact-row:hover { border-color: var(--green-dim); }
+    .contact-row:hover { border-color: var(--yellow-dim); }
     .contact-row .k {
       font-size: var(--sz-xs); color: var(--amber);
       text-transform: uppercase; letter-spacing: 0.1em;
@@ -1201,7 +1264,7 @@
       touch-action: manipulation;
     }
     .contact-tab:hover { color: var(--text); }
-    .contact-tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .contact-tab.active { color: var(--yellow); border-bottom-color: var(--yellow); }
 
     /* ===== CONTACT — 左右分栏 ===== */
     .contact-layout {
@@ -1240,6 +1303,7 @@
       padding: 0.65rem 1rem;
       background: var(--bg);
       border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       color: var(--text);
       transition: border-color 0.3s;
       width: 100%;
@@ -1250,7 +1314,7 @@
     .contact-form textarea:focus,
     .contact-form select:focus {
       outline: none;
-      border-color: var(--green);
+      border-color: var(--yellow);
     }
     .contact-form textarea { min-height: 100px; resize: vertical; }
 
@@ -1258,9 +1322,10 @@
       font-family: var(--font-mono);
       font-size: var(--sz-sm);
       padding: 0.7rem 2rem;
-      background: var(--green);
-      color: var(--bg);
-      border: 2px solid var(--green);
+      background: var(--yellow);
+      color: #fff;
+      border: 2px solid var(--yellow);
+      border-radius: var(--radius-full);
       cursor: pointer;
       letter-spacing: 0.04em;
       font-weight: 700;
@@ -1271,15 +1336,17 @@
     }
     .contact-form .form-submit:hover {
       background: transparent;
-      color: var(--green);
+      color: var(--yellow);
     }
 
     /* JOIN invitation block */
     .join-invite {
       margin-bottom: 1.8rem;
       padding: 1.4rem 1.6rem;
-      border-left: 3px solid var(--green);
+      border-left: 3px solid var(--yellow);
+      border-radius: var(--radius-md);
       background: var(--bg-alt);
+      box-shadow: var(--shadow-sm);
     }
     .join-invite-headline {
       font-family: var(--font-display);
@@ -1311,7 +1378,7 @@
       content: '→';
       position: absolute;
       left: 0;
-      color: var(--green);
+      color: var(--yellow);
     }
     .join-invite-body em {
       font-style: normal;
@@ -1322,7 +1389,7 @@
       margin-top: 0.8rem !important;
     }
     .join-invite-close strong {
-      color: var(--green);
+      color: var(--yellow);
       font-weight: 600;
     }
 
@@ -1336,6 +1403,7 @@
       padding: 0.2rem 0.5rem;
       background: transparent;
       border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       color: var(--text-dim);
       cursor: pointer;
       letter-spacing: 0.04em;
@@ -1343,8 +1411,8 @@
       min-height: 32px;
       touch-action: manipulation;
     }
-    .copy-btn:hover { border-color: var(--green); color: var(--green); }
-    .copy-btn.copied { border-color: var(--green); color: var(--green); }
+    .copy-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+    .copy-btn.copied { border-color: var(--yellow); color: var(--yellow); }
 
     /* ===== CONTACT — 右侧栏 ===== */
     .contact-sidebar {
@@ -1353,8 +1421,10 @@
     }
     .contact-sidebar-inner {
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
       background: var(--bg-alt);
       padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
     }
     .contact-sidebar-heading {
       font-family: var(--font-display);
@@ -1406,6 +1476,7 @@
       position: fixed; bottom: 2rem; left: 2rem; z-index: 0;
       font-family: var(--font-mono); font-size: var(--sz-xs);
       color: var(--border); user-select: none; pointer-events: none;
+      opacity: 0.6;
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
     }
@@ -1477,6 +1548,12 @@
         width: 140px;
         padding: 3px;
         flex-shrink: 0;
+      }
+      .hero-avatar-wrap img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
       }
 
       .hero-left {
@@ -1587,12 +1664,12 @@
       .contact-lines { margin-left: -0.75rem; margin-right: -0.75rem; padding-left: 0.75rem; padding-right: 0.75rem; }
     }
 
-    ::selection { background: var(--green-dim); color: var(--bg); }
+    ::selection { background: var(--yellow-dim); color: var(--text-hi); }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); }
 
-    :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+    :focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1683,9 +1760,9 @@
       <h2 class="section-title reveal">ABOUT</h2>
 
       <div class="about-professional reveal">
-        <p>把想法变成产品——<span style="color:var(--green);">2 天一个 MVP</span>。</p>
+        <p>把想法变成产品——<span style="color:var(--yellow);">2 天一个 MVP</span>。</p>
         <p>工作流里内嵌数字员工——在线agent帮我干活。</p>
-        <p><span style="color:var(--green);">海外 SaaS · Uniapp 小程序 · 微信 H5</span></p>
+        <p><span style="color:var(--yellow);">海外 SaaS · Uniapp 小程序 · 微信 H5</span></p>
         <p style="color:var(--text-hi); font-weight:600;">脑子里天天蹦 idea，就差一个人帮你把链接点开？</p>
         <p style="color:var(--amber); font-weight:600;">来对地方了。</p>
       </div>
@@ -1712,6 +1789,7 @@
       </div>
     </section>
 
+    <div class="hub-card">
     <!-- ===== PROJECTS ===== -->
     <section id="work" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
@@ -1773,8 +1851,9 @@
         </a>
 
       </div>
+      </div>
     </section>
-
+    </div>
     <!-- ===== SERVICES ===== -->
     <section id="services" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
@@ -1785,68 +1864,57 @@
 
       <div class="svc-grid reveal">
 
-        <!-- BUILD -->
+        <!-- 我想要… -->
         <article class="svc-card svc-card--build">
           <div class="svc-header">
-            <div class="svc-icon">&#x1F6E0;&#xFE0F;</div>
-            <h3 class="svc-name">BUILD · 帮你做</h3>
-            <p class="svc-tagline">三个人方向，垂直到底。从想法到上线，一个人全栈交付。</p>
+            <div class="svc-icon">&#x1F4E6;</div>
+            <h3 class="svc-name">我想要…</h3>
+            <p class="svc-tagline">SKILLS · 代码包 · 学习文档</p>
           </div>
           <div class="svc-body">
-            <div class="svc-section-label">业务线</div>
             <div class="svc-tags">
-              <span class="svc-tag">个人网站制作</span>
-              <span class="svc-tag">小程序开发</span>
-              <span class="svc-tag">AI 应用开发 · Agent 落地</span>
+              <span class="svc-tag">SKILLS</span>
+              <span class="svc-tag">代码包</span>
+              <span class="svc-tag">学习文档</span>
             </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">有想法缺实现 · 项目卡住了 · 需要一个全栈执行者</p>
-            <div class="svc-section-label">流程</div>
-            <p class="svc-process"><span>1</span> 需求对齐 → <span>2</span> 方案 &amp; 报价 → <span>3</span> 开发交付 → <span>4</span> 上线</p>
-            <a href="#contact" class="svc-cta" data-svc="build">有想法？来聊聊 →</a>
+            <p class="svc-fit">想要建立自己的优雅好看的个人网站？或者想要资料包？告诉我你需要什么，我发给你。不定期更新。</p>
+            <a href="#contact" class="svc-cta" data-svc="build">填表获取 →</a>
           </div>
         </article>
 
-        <!-- LEARN -->
+        <!-- 我想学… -->
         <article class="svc-card svc-card--learn">
           <div class="svc-header">
             <div class="svc-icon">&#x1F393;</div>
-            <h3 class="svc-name">LEARN · 教你做</h3>
-            <p class="svc-tagline">1v1 带你用 AI 做你自己的产品。教材就是你的项目，不是 demo。</p>
+            <h3 class="svc-name">我想学…</h3>
+            <p class="svc-tagline">1v1 用 AI 做你自己的产品</p>
           </div>
           <div class="svc-body">
-            <div class="svc-section-label">教学方向</div>
             <div class="svc-tags">
-              <span class="svc-tag">Vibe Coding 入门</span>
-              <span class="svc-tag">Agent 开发实战</span>
-              <span class="svc-tag">小程序 / SaaS 全流程</span>
+              <span class="svc-tag">Vibe Coding</span>
+              <span class="svc-tag">Agent 实战</span>
+              <span class="svc-tag">小程序 / SaaS</span>
             </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">想做独立开发没人带 · 用 AI 产出差口气 · 想学 Agent 落地但找不到入口</p>
-            <div class="svc-section-label">教学方式</div>
-            <p class="svc-process"><span>真实项目驱动</span> · <span>1v1 陪跑反馈</span> · <span>踩坑经验直接给</span></p>
-            <a href="#contact" class="svc-cta" data-svc="learn">了解教学计划 →</a>
+            <p class="svc-fit">想做独立开发没人带 · 用 AI 产出差口气</p>
+            <a href="#contact" class="svc-cta" data-svc="learn">了解计划 →</a>
           </div>
         </article>
 
-        <!-- CONSULT -->
+        <!-- 我想做… -->
         <article class="svc-card svc-card--consult">
           <div class="svc-header">
             <div class="svc-icon">&#x1F4AC;</div>
-            <h3 class="svc-name">CONSULT · 帮你想</h3>
-            <p class="svc-tagline">一次对话，乱麻理成线。产品方向 / 技术选型 / 职业困惑。</p>
+            <h3 class="svc-name">我想做…</h3>
+            <p class="svc-tagline">一次对话，方向清晰</p>
           </div>
           <div class="svc-body">
-            <div class="svc-section-label">咨询方向</div>
             <div class="svc-tags">
+              <span class="svc-tag">想定制化做一个自己的个人网站</span>
               <span class="svc-tag">大学生规划</span>
-              <span class="svc-tag">产品需求验证</span>
-              <span class="svc-tag">独立开发者转型</span>
+              <span class="svc-tag">产品验证</span>
+              <span class="svc-tag">独立开发转型</span>
             </div>
-            <div class="svc-section-label">适合谁</div>
-            <p class="svc-fit">迷茫的学生 · 想法太多的创业者 · 想转型的程序员</p>
-            <div class="svc-section-label">流程</div>
-            <p class="svc-process"><span>1</span> 预约时间 → <span>2</span> 提交背景 → <span>3</span> 深度对话 → <span>4</span> 行动清单</p>
+            <p class="svc-fit">迷茫的学生 · 想法多的创业者 · 想转型的程序员</p>
             <a href="#contact" class="svc-cta" data-svc="consult">预约咨询 →</a>
           </div>
         </article>
@@ -1854,6 +1922,7 @@
       </div>
     </section>
 
+    <div class="hub-card">
     <!-- ===== SKILL LIST ===== -->
     <section id="skills" class="section alt">
       <div class="block-grid" style="margin-bottom:0.6rem;">
@@ -1862,37 +1931,37 @@
       </div>
       <h2 class="section-title reveal">SKILLLIST</h2>
       <p class="reveal" style="font-family:var(--font-mono);font-size:var(--sz-xs);color:var(--text-dim);margin-bottom:1rem;max-width:600px;line-height:1.6;">
-        20 项 Agent 能力，覆盖需求到部署。日常在用的，不是 demo。
+        23 项自定义 Agent 能力，覆盖需求到部署。不包含内置/默认技能。
       </p>
 
       <!-- 📱 移动端：可点击展开卡片（PC 端隐藏） -->
       <div class="skill-mobile-card reveal">
         <div class="skill-mobile-bar">&gt; skill-list</div>
         <div class="skill-mobile-body">
-          <div class="skill-mobile-section-label">🥇 核心技能</div>
+          <div class="skill-mobile-section-label">🥇 核心锻造</div>
           <div class="skill-mobile-gold-list">
             <div class="skill-mobile-gold-item">
-              <span class="sm-star">★</span><span class="sm-name">frontend-design</span>
+              <span class="sm-star">★</span><span class="sm-name">front-design</span>
               <span class="sm-desc">创建独特的、生产级前端界面，避 AI 塑料感。双轮迭代设计流程</span>
             </div>
             <div class="skill-mobile-gold-item">
-              <span class="sm-star">★</span><span class="sm-name">deep-research</span>
-              <span class="sm-desc">深度调研引擎 — 多源搜索 → 交叉验证 → 合成带引用的完整报告</span>
+              <span class="sm-star">★</span><span class="sm-name">ppt</span>
+              <span class="sm-desc">PPT/幻灯片生成 — 杂志风+瑞士风双视觉系统，32 种锁定版式</span>
             </div>
             <div class="skill-mobile-gold-item">
-              <span class="sm-star">★</span><span class="sm-name">code-review</span>
-              <span class="sm-desc">Diff 正确性审查 + 可简化性分析，支持低/中/高三级力度</span>
+              <span class="sm-star">★</span><span class="sm-name">push-feishu</span>
+              <span class="sm-desc">推送对话摘要/研究报告到飞书知识库，自动创建页面+写入内容</span>
             </div>
             <div class="skill-mobile-gold-item">
-              <span class="sm-star">★</span><span class="sm-name">diagnose</span>
-              <span class="sm-desc">六阶段结构化 Debug 循环：复现→假设→插桩→修复→回归</span>
+              <span class="sm-star">★</span><span class="sm-name">deepS</span>
+              <span class="sm-desc">轻量深度调研 — 多源搜索 → 交叉验证 → 合成带引用报告</span>
             </div>
             <div class="skill-mobile-gold-item">
               <span class="sm-star">★</span><span class="sm-name">improve-codebase-architecture</span>
               <span class="sm-desc">扫描全库，输出 HTML 可视化架构报告，防代码腐化</span>
             </div>
           </div>
-          <div class="skill-mobile-teaser">... 15 项技能已加密，点击解密</div>
+          <div class="skill-mobile-teaser">... 18 项技能已加密，点击解密</div>
           <button class="skill-expand-btn" id="skillExpandBtn" aria-expanded="false">
             <span>展开全部技能列表</span>
             <span class="btn-arrow">↓</span>
@@ -1916,146 +1985,167 @@
             <span>TIER</span>
           </div>
 
-          <!-- 🥇 金级 — 核心锻造技能 -->
+          <!-- 🥇 金级 — 核心锻造技能（每天都在用） -->
           <div class="skill-row skill-row--gold">
             <span class="skill-idx">★ 01</span>
-            <span class="skill-name">frontend-design</span>
-            <span class="skill-overview">创建独特的、生产级前端界面，避 AI 塑料感。双轮迭代设计流程：构思→批判→编码，严格从设计计划推导每个色值和字体选择</span>
+            <span class="skill-name">front-design</span>
+            <span class="skill-overview">创建独特的、生产级前端界面，避 AI 塑料感。融合 Anthropic 官方 + Garden 26 品牌 + UI/UX Pro Max 规则引擎。双轮迭代设计流程：构思→批判→编码，严格从设计计划推导每个色值和字体选择</span>
             <span class="skill-tier">GOLD</span>
           </div>
 
           <div class="skill-row skill-row--gold">
             <span class="skill-idx">★ 02</span>
-            <span class="skill-name">deep-research</span>
-            <span class="skill-overview">深度调研引擎 — 扇形展开多源搜索 → 交叉验证 → 合成带引用的完整报告。适合需要多维度、事实核查的复杂问题</span>
+            <span class="skill-name">ppt</span>
+            <span class="skill-overview">PPT/幻灯片生成 — 杂志风（衬线+WebGL流体背景）+ 瑞士国际主义风（无衬线+网格点阵）双视觉系统，32 种锁定版式 + 9 套主题色。强制弹窗提问→风格预览→用户选定→展开完整版</span>
             <span class="skill-tier">GOLD</span>
           </div>
 
           <div class="skill-row skill-row--gold">
             <span class="skill-idx">★ 03</span>
-            <span class="skill-name">code-review</span>
-            <span class="skill-overview">Diff 正确性审查 + 可简化性分析，支持低/中/高三级力度。可选 --comment 发布为 PR 行内评论或 --fix 直接应用到工作树</span>
+            <span class="skill-name">push-feishu</span>
+            <span class="skill-overview">推送对话摘要、研究报告到飞书知识库 — 自动创建页面、写入结构化内容。内置飞书 API 开发铁律：block_type 映射、编码避坑、权限要求速查</span>
             <span class="skill-tier">GOLD</span>
           </div>
 
           <div class="skill-row skill-row--gold">
             <span class="skill-idx">★ 04</span>
-            <span class="skill-name">diagnose</span>
-            <span class="skill-overview">六阶段结构化 Debug 循环：复现→最小化→假设→插桩→修复→回归测试。适用于难以定位的 Bug 和性能退化</span>
+            <span class="skill-name">deepS</span>
+            <span class="skill-overview">轻量深度调研引擎 — 多源搜索 → 交叉验证 → 合成带引用的完整报告。单 Agent 架构，适合技术选型、竞品分析、方案对比、合规检查</span>
             <span class="skill-tier">GOLD</span>
           </div>
 
           <div class="skill-row skill-row--gold">
             <span class="skill-idx">★ 05</span>
             <span class="skill-name">improve-codebase-architecture</span>
-            <span class="skill-overview">扫描全库，输出 HTML 可视化架构报告：模块深度分析、耦合检测、Before/After 对比图、优先级排序。防代码腐化</span>
+            <span class="skill-overview">扫描全库，输出 HTML 可视化架构报告：模块深度分析、耦合检测、Before/After 对比图、优先级排序（Strong / Worth exploring / Speculative）。每 1-2 天跑一次防代码腐化</span>
             <span class="skill-tier">GOLD</span>
           </div>
 
-          <!-- 🥈 银级 — 工作流核心技能 -->
+          <!-- 🥈 银级 — 星星工作流（Phase 0→4 完整链路） -->
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 06</span>
-            <span class="skill-name">grill-with-docs</span>
-            <span class="skill-overview">深度需求拷问，边问边沉淀术语到 CONTEXT.md + 创建架构决策记录 (ADR)。确保需求与领域模型对齐</span>
+            <span class="skill-name">star</span>
+            <span class="skill-overview">星星工程流总纲 — 五阶速验法从想法到交付。包含项目初始化→需求对齐→PRD→垂直拆分→TDD 实现→架构巡检的完整自动引导链。</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 07</span>
-            <span class="skill-name">to-prd</span>
-            <span class="skill-overview">从对话上下文和代码库理解中合成完整 PRD，包含问题陈述→解决方案→User Stories→实现决策→边界声明。自动发布到 GitHub Issue</span>
+            <span class="skill-name">grill-with-docs</span>
+            <span class="skill-overview">Phase 1: 深度需求拷问，边问边沉淀术语到 CONTEXT.md + 创建架构决策记录 (ADR)。确保需求与领域模型对齐，不跳过任何模糊点</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 08</span>
-            <span class="skill-name">to-issues</span>
-            <span class="skill-overview">PRD 垂直拆分为可并行开发的曳光弹 Issues，每个 Issue = Schema→API→UI→Test 全走通，标注 AFK/HITL 类型</span>
+            <span class="skill-name">to-prd</span>
+            <span class="skill-overview">Phase 1→2: 从对话上下文和代码库理解中合成完整 PRD，包含问题陈述→解决方案→User Stories→实现决策→边界声明。自动发布到 GitHub Issue</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 09</span>
-            <span class="skill-name">tdd</span>
-            <span class="skill-overview">红→绿→重构循环。一次只一个测试，只验证公共接口行为，不许测私有方法。先绿后重构，红时不重构</span>
+            <span class="skill-name">to-issues</span>
+            <span class="skill-overview">Phase 2: PRD 垂直拆分为可并行开发的曳光弹 Issues，每个 Issue = Schema→API→UI→Test 全走通。标注 AFK/HITL 类型，防止水平拆分</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 10</span>
-            <span class="skill-name">verify</span>
-            <span class="skill-overview">验证代码变更是否真正生效 — 运行应用并观察行为，确认修复/功能按预期工作</span>
+            <span class="skill-name">tdd</span>
+            <span class="skill-overview">Phase 3: 红→绿→重构循环。一次只一个测试，只验证公共接口行为，不许测私有方法。先绿后重构，红时不重构</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
             <span class="skill-idx">◆ 11</span>
+            <span class="skill-name">debug</span>
+            <span class="skill-overview">六阶段结构化 Debug 循环：建立反馈回路→复现→列可证伪假设→插桩→先写回归测试再修→清理+复盘。适用于难以定位的 Bug</span>
+            <span class="skill-tier">SILVER</span>
+          </div>
+
+          <div class="skill-row skill-row--silver">
+            <span class="skill-idx">◆ 12</span>
             <span class="skill-name">handoff</span>
             <span class="skill-overview">压缩当前对话为交接文档，下一个 Agent 无缝接手。适合上下文过长需要换会话的场景</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
           <div class="skill-row skill-row--silver">
-            <span class="skill-idx">◆ 12</span>
-            <span class="skill-name">simplify</span>
-            <span class="skill-overview">审查变更代码的复用性、简化性、效率和高层抽象优化。纯质量审查，不猎 Bug（用 code-review）</span>
+            <span class="skill-idx">◆ 13</span>
+            <span class="skill-name">deploy</span>
+            <span class="skill-overview">一键部署 — 自动检测平台（Cloudflare Pages / Vercel）→构建→部署→验证。支持 GitHub 仓库自动创建 + SSH 推送全链路</span>
             <span class="skill-tier">SILVER</span>
           </div>
 
-          <!-- 🥉 铜级 — 实用工具技能 -->
-          <div class="skill-row skill-row--bronze">
-            <span class="skill-idx">• 13</span>
-            <span class="skill-name">update-config</span>
-            <span class="skill-overview">配置 Claude Code harness settings.json — 权限、钩子、环境变量。支持项目级/用户级配置分离</span>
-            <span class="skill-tier">BRONZE</span>
-          </div>
-
+          <!-- 🥉 铜级 — 领域专精工具（按需调用） -->
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 14</span>
-            <span class="skill-name">loop</span>
-            <span class="skill-overview">按间隔重复运行 prompt 或 slash 命令，支持自定义间隔。适用于轮询部署状态、定时检查等场景</span>
+            <span class="skill-name">changelog</span>
+            <span class="skill-overview">从 Git 历史自动生成结构化的发布说明 (CHANGELOG.md)，分类 Features / Fixes / Breaking Changes</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 15</span>
-            <span class="skill-name">run</span>
-            <span class="skill-overview">启动并驱动项目应用，支持 CLI/Server/TUI/Electron/浏览器驱动等多种项目类型自动识别</span>
+            <span class="skill-name">db-design</span>
+            <span class="skill-overview">数据库设计 — Schema 规划、索引策略、迁移方案、范式选择。从业务实体推导到物理表结构</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 16</span>
-            <span class="skill-name">claude-api</span>
-            <span class="skill-overview">Claude API / Anthropic SDK 参考 — 模型 ID、定价、参数、流式、工具使用、MCP、Token 计数、模型迁移</span>
+            <span class="skill-name">api-design</span>
+            <span class="skill-overview">REST API 设计 — 端点规划、状态码选择、分页策略、错误格式标准化。从领域模型推导资源层次</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 17</span>
-            <span class="skill-name">security-review</span>
-            <span class="skill-overview">安全审查 — 对代码变更进行安全维度扫描，发现潜在安全漏洞和风险点</span>
+            <span class="skill-name">idea-validate</span>
+            <span class="skill-overview">产品想法验证引擎 — Mom Test 过滤真实痛点 → 对抗挑战 → 冷启动可行性评估。默认裁决是 NO-GO，必须证明可行性才能通过</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 18</span>
-            <span class="skill-name">init / review</span>
-            <span class="skill-overview">项目初始化 + PR 审查。init 搭建项目骨架，review 拉取并审查 Pull Request</span>
+            <span class="skill-name">wechat-claude-code</span>
+            <span class="skill-overview">微信 Claude Code 移动端适配 — X5 内核专项：Flexbox 四重声明、动态 --vh、WeixinJSBridge 异步模式、设备分级降级</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 19</span>
-            <span class="skill-name">fewer-permission-prompts</span>
-            <span class="skill-overview">扫描 transcripts 中的只读 Bash/MCP 工具调用，添加优先白名单到 .claude/settings.json，减少权限提示</span>
+            <span class="skill-name">design-style-analyzer</span>
+            <span class="skill-overview">设计风格分析器 — 从品牌识别 UI 设计风格，归类为野兽派/暗黑终端/瑞士风等，输出可执行的设计决策</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
           <div class="skill-row skill-row--bronze">
             <span class="skill-idx">• 20</span>
-            <span class="skill-name">keybindings-help</span>
-            <span class="skill-overview">自定义键盘快捷键 — 重绑定按键、添加和弦绑定、修改提交键。编辑 ~/.claude/keybindings.json</span>
+            <span class="skill-name">chick-social-card</span>
+            <span class="skill-overview">社交分享卡片生成 — 为网页/文章/产品自动生成 Open Graph / Twitter Card 预览图</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 21</span>
+            <span class="skill-name">chick-video</span>
+            <span class="skill-overview">视频内容生成 — 从文案/脚本自动生成短视频内容，支持多平台格式适配</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 22</span>
+            <span class="skill-name">custom-learning</span>
+            <span class="skill-overview">自定义学习路径规划 — 根据目标技能/领域生成结构化学习计划，包含里程碑、资源和检查点</span>
+            <span class="skill-tier">BRONZE</span>
+          </div>
+
+          <div class="skill-row skill-row--bronze">
+            <span class="skill-idx">• 23</span>
+            <span class="skill-name">globallast30days</span>
+            <span class="skill-overview">30 天全球趋势分析 — 扫描特定领域过去 30 天的全球动态，输出趋势报告和洞察</span>
             <span class="skill-tier">BRONZE</span>
           </div>
 
@@ -2067,6 +2157,7 @@
         </div>
       </div>
     </section>
+    </div>
 
     <!-- ===== CONTACT ===== -->
     <section id="contact" class="section alt">
@@ -2078,47 +2169,45 @@
 
       <!-- Tabs -->
       <div class="contact-tabs reveal" id="contactTabs">
-        <button class="contact-tab active" data-tab="build">BUILD · 帮你做</button>
-        <button class="contact-tab" data-tab="learn">LEARN · 教你做</button>
-        <button class="contact-tab" data-tab="consult">CONSULT · 帮你想</button>
+        <button class="contact-tab active" data-tab="build">我想要…</button>
+        <button class="contact-tab" data-tab="learn">我想学…</button>
+        <button class="contact-tab" data-tab="consult">我想做…</button>
         <button class="contact-tab" data-tab="join">JOIN · 加入我们</button>
       </div>
 
       <div class="contact-layout reveal">
         <div class="contact-form-area">
 
-      <!-- BUILD form -->
+      <!-- 我想要… form -->
       <div class="contact-form-panel active" id="panel-build">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
-          个人网站 · 小程序 · AI Agent 落地——告诉我你的情况，24h 内回复，给出方案和报价。
+          SKILLS · 代码包 · 学习文档或者想要建立自己的个人网站？——告诉我你要什么，24h 内发给你。
         </p>
-        <form class="contact-form" data-type="BUILD">
-          <label>你的名字 / 团队</label>
+        <form class="contact-form" data-type="我想要…">
+          <label>你的名字</label>
           <input type="text" name="name" placeholder="怎么称呼？" required>
           <label>联系方式（微信 / 邮箱）</label>
-          <input type="text" name="contact" placeholder="微信或邮箱，方便我联系你" required>
-          <label>项目类型</label>
-          <select name="project_type">
-            <option value="">选一个方向</option>
-            <option value="个人网站">个人网站 / 作品集 / 博客</option>
-            <option value="小程序">小程序开发（微信 / 支付宝）</option>
-            <option value="AI应用">AI 应用开发 · Agent 落地</option>
-            <option value="其他">其他 / 多个方向，下面补充</option>
+          <input type="text" name="contact" placeholder="微信或邮箱" required>
+          <label>想要什么</label>
+          <select name="resource_type">
+            <option value="">选一个</option>
+            <option value="SKILLS">SKILLS（Agent 技能包）</option>
+            <option value="代码包">代码包（模板 / 脚手架）</option>
+            <option value="学习文档">学习文档（教程 / 指南）</option>
+            <option value="都要">都要 / 看看有什么</option>
           </select>
-          <label>项目描述</label>
-          <textarea name="project" placeholder="目标用户是谁？核心功能？有没有参考？卡在哪？" required></textarea>
-          <label>预算范围</label>
-          <input type="text" name="budget" placeholder="填个范围，或"聊聊再说"">
-          <button type="submit" class="form-submit">发送需求 →</button>
+          <label>具体需求</label>
+          <textarea name="detail" placeholder="想要什么类型的？用来做什么？越具体越好。" required></textarea>
+          <button type="submit" class="form-submit">发送请求 →</button>
         </form>
       </div>
 
-      <!-- LEARN form -->
+      <!-- 我想学… form -->
       <div class="contact-form-panel reveal" id="panel-learn">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
-          你现在什么水平？想做 Agent 还是小程序？——我来定制 1v1 计划。
+          你现在什么水平？我来定制 1v1 计划。
         </p>
-        <form class="contact-form" data-type="LEARN">
+        <form class="contact-form" data-type="我想学…">
           <label>你的名字</label>
           <input type="text" name="name" placeholder="怎么称呼？" required>
           <label>联系方式（微信 / 邮箱）</label>
@@ -2144,12 +2233,12 @@
         </form>
       </div>
 
-      <!-- CONSULT form -->
+      <!-- 我想做… form -->
       <div class="contact-form-panel reveal" id="panel-consult">
         <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">
-          你的困惑和背景——24h 内确认时间。一次对话，省一个月弯路。
+          想开发自己的个人网站&你的困惑和背景——24h 内确认时间。
         </p>
-        <form class="contact-form" data-type="CONSULT">
+        <form class="contact-form" data-type="我想做…">
           <label>你的名字</label>
           <input type="text" name="name" placeholder="怎么称呼？" required>
           <label>联系方式（微信 / 邮箱）</label>
@@ -2157,6 +2246,7 @@
           <label>咨询方向</label>
           <select name="topic">
             <option value="">想聊什么？</option>
+            <option value="大学生规划">从业者想定制化开发自己的专业个人网站？</option>
             <option value="大学生规划">大学生：方向选择 / 求职 / 技能规划</option>
             <option value="产品需求验证">产品验证：idea 评估 / 技术选型 / MVP 策略</option>
             <option value="独立开发者转型">独立开发：接单转产品 / 定价 / 获客</option>
@@ -2176,7 +2266,7 @@
             <p>我在找这样的人：</p>
             <ul>
               <li>有<em>自己想做的产品</em>——不是等需求，是"非做不可"</li>
-              <li>前端能写（React / Vue / Next.js），全栈加分</li>
+              <li>至少会HTML或者国内运营，工作流高度AI集成自动化</li>
               <li>有独立项目在跑——半成品也比"想做还没开始"强</li>
               <li>对 AI 工具有好奇心——<em>"让我试试它能不能做 xx"</em>的那种</li>
             </ul>
@@ -2202,7 +2292,7 @@
         <aside class="contact-sidebar">
           <div class="contact-sidebar-inner">
             <p class="contact-sidebar-heading">直达联系</p>
-            <div class="contact-row"><span class="k">WeChat</span><span class="v">SupersupErChik0124 <button class="copy-btn" onclick="navigator.clipboard.writeText('SupersupErChik0124');this.textContent='已复制!';this.classList.add('copied');setTimeout(()=>{this.textContent='复制';this.classList.remove('copied')},2000)">复制</button></span></div>
+            <div class="contact-row"><span class="k">WeChat</span><span class="v">SurpErChik_<button class="copy-btn" onclick="navigator.clipboard.writeText('SupersupErChik0124');this.textContent='已复制!';this.classList.add('copied');setTimeout(()=>{this.textContent='复制';this.classList.remove('copied')},2000)">复制</button></span></div>
             <div class="contact-row"><span class="k">Email</span><span class="v"><a href="mailto:3432926599@qq.com">3432926599@qq.com</a></span></div>
             <div class="contact-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener">3432926599-cyber</a></span></div>
 
@@ -2220,10 +2310,11 @@
         </aside>
       </div><!-- /contact-layout -->
     </section>
+    </div>
 
     <footer class="footer">
       <span>© 2026 Chik.io</span>
-      <span style="color:var(--green);">●</span>
+      <span style="color:var(--yellow);">●</span>
     </footer>
 
     <nav class="mob-nav">
@@ -2391,8 +2482,6 @@
 
     // ===== 飞书 Webhook 表单提交 =====
     (function() {
-      var WEBHOOK = 'https://open.feishu.cn/open-apis/bot/v2/hook/64a262c1-c97d-4750-bcf0-a5d4983aeb97';
-
       document.querySelectorAll('.contact-form').forEach(function(form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
@@ -2412,30 +2501,16 @@
             if (el.name) fields[el.name] = el.value;
           });
 
-          // 构建飞书消息
-          var lines = ['📬 **新咨询 · ' + type + '**', ''];
-          var labels = {
-            name: '名字', contact: '联系方式', project: '项目描述', budget: '预算',
-            project_type: '项目类型',
-            level: '当前基础', direction: '想学方向', goal: '想学什么',
-            topic: '咨询方向', context: '背景说明',
-            wechat: '微信号', portfolio: '项目/简历', why: '为什么想加入'
-          };
-          Object.keys(fields).forEach(function(k) {
-            if (fields[k]) lines.push((labels[k] || k) + '：' + fields[k]);
-          });
-          lines.push('', '⏰ ' + new Date().toLocaleString('zh-CN'));
-
-          fetch(WEBHOOK, {
+          fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ msg_type: 'text', content: { text: lines.join('\n') } })
+            body: JSON.stringify({ type: type, fields: fields })
           })
           .then(function(r) { return r.json(); })
           .then(function(data) {
             if (data.code === 0) {
               btn.textContent = '已发送 ✓';
-              btn.style.background = 'var(--green)';
+              btn.style.background = 'var(--yellow)';
               form.reset();
               setTimeout(function() {
                 btn.textContent = origText;
@@ -2464,7 +2539,7 @@
   </script>
 
   <!-- Toast -->
-  <div id="toast" style="display:none;position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);z-index:9999;font-family:var(--font-mono);font-size:var(--sz-sm);padding:0.7rem 1.5rem;background:var(--green);color:var(--bg);border:2px solid var(--green);letter-spacing:0.04em;transition:all 0.3s;"></div>
+  <div id="toast" style="display:none;position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);z-index:9999;font-family:var(--font-mono);font-size:var(--sz-sm);padding:0.7rem 1.5rem;background:var(--yellow);color:#1a1a1a;border:2px solid var(--yellow);border-radius:var(--radius-full);letter-spacing:0.04em;transition:all 0.3s;"></div>
 
 </body>
 </html>
