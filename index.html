@@ -8,7 +8,15 @@
   <meta name="x5-page-mode" content="app">
   <meta name="format-detection" content="telephone=no,email=no">
   <title>Chik.io</title>
-  <meta name="description" content="Chik.io · 一人产品实验室，帮有想法的人把产品做出来。正在扩招同好中。">
+  <meta name="description" content="Chik.io · 一人产品实验室。小程序 · 网站 · AI 工具，2天出 MVP。关注公众号 supErChik。">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chik.io — 想法进来，产品出去">
+  <meta property="og:description" content="一人产品实验室。帮你做：小程序/网站/AI 工具，2天出 MVP。教你做：1v1 用 AI 做出你自己的产品。">
+  <meta property="og:image" content="https://chik.io/images/ip.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FFFEF7'/><circle cx='50' cy='45' r='32' fill='%23F5C400'/><circle cx='38' cy='42' r='5' fill='%231a1a1a'/><polygon points='52,46 62,44 52,50' fill='%23F0A83C'/><rect x='20' y='20' width='12' height='8' rx='3' fill='%23DB3839'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=block" rel="stylesheet">
@@ -172,20 +180,13 @@
 
     /* ===== HERO ===== */
     .hero {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3rem;
       min-height: 100dvh;
       padding-top: 5rem;
       padding-bottom: 3rem;
       align-items: center;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 3rem;
     }
 
     .hero-left {
@@ -317,50 +318,29 @@
       box-shadow: 0 4px 12px rgba(245,196,0,0.12);
     }
 
-    /* ===== HUB CARD - 02+04 合并悬浮大卡片 ===== */
-    .hub-card {
+    /* ===== SECTION (统一卡片样式) ===== */
+    .section {
       background: var(--bg-alt);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-md);
       padding: 2rem 2rem 1.5rem;
       margin: 2rem 0;
+      scroll-margin-top: 4rem;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .hub-card:hover {
+    .section:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
     }
-    .hub-card .section {
-      padding: 0;
-      margin-bottom: 2.5rem;
-    }
-    .hub-card .section:last-child {
-      margin-bottom: 0;
-    }
-    /* 卡片内 section 标题精简 */
-    .hub-card .section-title {
-      font-size: 1.1rem;
-      margin-bottom: 0.8rem;
-    }
-    .hub-card .block-grid {
-      margin-bottom: 0.3rem !important;
-    }
-    .hub-card .block-num {
-      font-size: 1.3rem;
-      top: 1rem;
-    }
     @media (max-width: 500px) {
-      .hub-card {
+      .section {
         padding: 1.2rem 0.75rem 1rem;
         margin-left: 0;
         margin-right: 0;
         border-radius: var(--radius-md);
       }
     }
-
-    /* ===== SECTION ===== */
-    .section { padding: 4rem 0; scroll-margin-top: 4rem; }
 
     /* ===== LABELED BLOCK ===== */
     .block-grid {
@@ -627,21 +607,17 @@
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .proj-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .proj-row:hover {
       background: rgba(245, 196, 0, 0.05);
       color: var(--text-hi);
       transform: translateX(4px);
     }
 
-    .proj-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .proj-row:hover .proj-arrow { color: var(--yellow); }
     .proj-idx {
       color: var(--text-dim);
       font-size: var(--sz-xs);
     }
-
-    .proj-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .proj-row:hover .proj-idx { color: var(--yellow); }
     .proj-title {
       font-weight: 700;
@@ -1655,7 +1631,7 @@
 
     /* ===== RESPONSIVE - Tablet ===== */
     @media (max-width: 900px) {
-      .section { padding: 3rem 0; }
+      .section { padding: 1.5rem 1.5rem 1.2rem; }
       .hero { grid-template-columns: 1fr; min-height: auto; gap: 1.5rem; padding-top: 5rem; }
       .hero-left { max-width: 100%; }
       .hero-right { align-items: flex-start; order: -1; }
@@ -1691,7 +1667,6 @@
     /* ===== RESPONSIVE - Mobile ===== */
     @media (max-width: 500px) {
       .page { padding: 0 0 6rem; }
-      .section { padding: 2.5rem 0.75rem; }
 
       /* Hero：全屏首屏，不露出下方模块 -- 微信兼容 */
       .hero {
@@ -2255,7 +2230,7 @@
         </h1>
         <p class="hero-positioning">想法进来 <span class="hero-dot">→</span> 产品出去</p>
         <div class="hero-cta-group">
-          <a href="#contact" class="hero-cta hero-cta--primary">有 idea？来聊 →</a>
+          <a href="#contact" class="hero-cta hero-cta--primary">关注公众号 →</a>
         </div>
       </div>
 
@@ -2265,7 +2240,7 @@
         </div>
         <div class="hero-stats">
           <span>12+</span> 技术玩具
-          <span>5</span> 在跑产品
+          <span>3</span> 在跑产品
           <span>∞</span> 待验证脑洞
         </div>
       </div>
@@ -2289,7 +2264,7 @@
       </div>
 
       <div class="about-story-toggle reveal" id="aboutStoryToggle">
-        <span class="toggle-text">看看这个人都折腾过什么 ↓</span>
+        <span class="toggle-text">三个月，五个产品，从零到上线 ↓</span>
         <span class="toggle-icon">+</span>
       </div>
 
@@ -2299,13 +2274,8 @@
           <p style="margin-bottom:0.6rem;">海外 SaaS · Uniapp 小程序 · Web 搭建 · 微信 H5--<em>这代人的赛道。</em></p>
           <p class="note">如果你也有类似经历--脑子里天天蹦 idea 但缺人落地，或者技术过硬但找不到想做的事。<br><strong>下面这些就是为你准备的。</strong></p>
       </div>
-      </div>
-              </div>
-        
-      </div>
 </section>
 
-    <div class="hub-card">
     <!-- ===== PROJECTS ===== -->
     <section id="work" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
@@ -2344,9 +2314,8 @@
         </a>
 
       </div>
-      </div>
     </section>
-    </div>
+
     <!-- ===== SERVICES ===== -->
     <section id="services" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
@@ -2362,7 +2331,7 @@
             <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--text-hi);margin-bottom:0.2rem;">数字产品</h3>
             <p style="font-size:var(--sz-sm);color:var(--text-mid);line-height:1.5;">开箱即用的学习文档和 Agent Skills。每个都是真实项目中跑出来的，拿来就能用。</p>
           </div>
-          <span style="font-family:var(--font-numbers);font-size:0.85rem;font-weight:700;color:var(--amber);background:var(--amber-dim);padding:0.35rem 0.8rem;border-radius:var(--radius-full);">¥49 - 99</span>
+          <span style="font-family:var(--font-numbers);font-size:0.85rem;font-weight:700;color:var(--amber);background:var(--amber-dim);padding:0.35rem 0.8rem;border-radius:var(--radius-full);">¥49 - 199</span>
         </div>
         <div class="products-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:1.2rem;">
           <div class="assets-card">
@@ -2390,44 +2359,15 @@
           </ul>
           <div style="text-align:center;flex-shrink:0;">
             <img src="images/qrcode_for_gh_e9c79db89bed_258.jpg" alt="公众号二维码" style="width:64px;height:64px;border:1px solid var(--border);border-radius:var(--radius-sm);object-fit:cover;">
-            <p style="font-size:0.6rem;color:var(--text-dim);margin-top:0.2rem;">点击免费资料选择学习文档获取</p>
+            <p style="font-size:0.6rem;color:var(--text-dim);margin-top:0.2rem;">扫码关注公众号 → 免费资料 → 学习文档</p>
           </div>
         </div>
       </div>      
-      <div class="svc-grid reveal">
-        <article class="svc-card svc-card--build">
-          <div class="svc-header">
-            <div class="svc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-            <h3 class="svc-name">帮你做</h3>
-            <p class="svc-tagline">小程序 · 网站 · 个人主页 · AI 工具开发</p>
-          </div>
-          <div class="svc-body">
-            <div class="svc-tags"><span class="svc-tag">小程序</span><span class="svc-tag">网站/主页</span><span class="svc-tag">AI Agent</span></div>
-            <p class="svc-fit">你有想法，我来落地。从需求到上线全程负责，2 天出 MVP。</p>
-            <p class="svc-price">¥2,000 - 30,000 / 项目</p>
-            <a href="#contact" class="svc-cta">填需求 →</a>
-          </div>
-        </article>
-
-        <article class="svc-card svc-card--learn">
-          <div class="svc-header">
-            <div class="svc-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg></div>
-            <h3 class="svc-name">教你做</h3>
-            <p class="svc-tagline">1v1 用 AI 做出你自己的产品</p>
-          </div>
-          <div class="svc-body">
-            <div class="svc-tags"><span class="svc-tag">Vibe Coding</span><span class="svc-tag">Agent 实战</span><span class="svc-tag">小程序/SaaS</span></div>
-            <p class="svc-fit">零基础也能上手。不是听课，带着你做直到上线。</p>
-            <p class="svc-price">¥299 / 次 · 首试 ¥99</p>
-            <a href="#contact" class="svc-cta">约时间 →</a>
-          </div>
-        </article>
-      </div>
+      <!-- 服务详情已移至 CONTACT 宣传标语 -->
     </section>
 
-    <div class="hub-card">
     <!-- ===== SKILL LIST ===== -->
-    <section id="skills" class="section alt">
+    <section id="skills" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
         <div class="block-num reveal">/04</div>
         <div></div>
@@ -2511,70 +2451,33 @@
         </details>
       </div>
         </section>
-      </div>
 
-      <div class="hub-card">
         <!-- ===== CONTACT ===== -->
-    <section id="contact" class="section alt">
+    <section id="contact" class="section">
       <div class="block-grid" style="margin-bottom:0.6rem;">
         <div class="block-num reveal">/05</div>
         <div></div>
       </div>
       <h2 class="section-title reveal">CONTACT</h2>
 
-      <div class="contact-layout reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;max-width:800px;margin:0 auto;">
+      <!-- 宣传标语（原帮你做/教你做卡片精华） -->
+      <div class="reveal" style="text-align:center;margin-bottom:1.8rem;">
+        <p style="font-family:var(--font-display);font-size:1.05rem;color:var(--text-hi);margin-bottom:0.6rem;line-height:1.8;">
+          <span style="color:var(--yellow);">帮你做</span> — 小程序 · 网站 · AI 工具，2 天出 MVP &nbsp;|&nbsp;
+          <span style="color:var(--amber);">教你做</span> — 1v1 用 AI 做出你自己的产品，零基础也能上手
+        </p>
+      </div>
 
-        <!-- 左：联系方式 -->
-        <div>
-          <p style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-dim);margin-bottom:1.2rem;line-height:1.6;">对上面的服务感兴趣？<br>微信或邮件直接联系，24h 内回复。</p>
-          <div style="display:flex;flex-direction:column;gap:0.7rem;">
-            <div style="display:flex;align-items:center;gap:0.6rem;padding:0.7rem 0.9rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);">
-              <span style="font-family:var(--font-numbers);font-weight:700;color:var(--amber);min-width:50px;font-size:0.85rem;">微信</span>
-              <span style="flex:1;font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-hi);">SurpErChik_</span>
-             
-              <button onclick="navigator.clipboard.writeText('SupersupErChik0124');this.textContent='已复制!';setTimeout(()=>{this.textContent='复制'},2000)" style="font-family:var(--font-mono);font-size:0.65rem;padding:0.25rem 0.6rem;background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius-full);cursor:pointer;color:var(--text-dim);flex-shrink:0;">复制</button>
-            </div>
-            <div style="display:flex;align-items:center;gap:0.6rem;padding:0.7rem 0.9rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);">
-              <span style="font-family:var(--font-numbers);font-weight:700;color:var(--amber);min-width:50px;font-size:0.85rem;">邮箱</span>
-              <a href="mailto:3432926599@qq.com" style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--blue);text-decoration:none;">3432926599@qq.com</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 右：社区链接 + 信任信号 -->
-        <div>
-          <p style="font-family:var(--font-display);font-size:0.95rem;color:var(--text-hi);margin-bottom:0.8rem;">也在这些地方</p>
-          <div style="display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.2rem;">
-            <a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;padding:0.7rem 0.9rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:all 0.2s;">
-              <span style="font-family:var(--font-numbers);font-weight:700;color:var(--amber);min-width:50px;font-size:0.85rem;">GitHub</span>
-              <span style="font-family:var(--font-mono);font-size:var(--sz-sm);">3432926599-cyber</span>
-              <span style="margin-left:auto;color:var(--text-dim);font-size:0.7rem;">→</span>
-            </a>
-            <a href="https://space.bilibili.com/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;padding:0.7rem 0.9rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);transition:all 0.2s;">
-              <span style="font-family:var(--font-numbers);font-weight:700;color:var(--amber);min-width:50px;font-size:0.85rem;">B站</span>
-              <span style="font-family:var(--font-mono);font-size:var(--sz-sm);">supErChik</span>
-              <span style="margin-left:auto;color:var(--text-dim);font-size:0.7rem;">→</span>
-            </a>
-            <div style="display:flex;align-items:center;gap:0.5rem;padding:0.7rem 0.9rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);">
-              <span style="font-family:var(--font-numbers);font-weight:700;color:var(--amber);min-width:50px;font-size:0.85rem;">公众号</span>
-              <span style="font-family:var(--font-mono);font-size:var(--sz-sm);color:var(--text-mid);">supErChik</span>
-            </div>
-          </div>
-          <div style="display:flex;gap:1.5rem;font-size:var(--sz-xs);color:var(--text-dim);font-family:var(--font-mono);padding:0.6rem 0.9rem;background:rgba(91,168,90,0.06);border-radius:var(--radius-sm);">
-            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>24h 内回复</span>
-            <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>每周限 30 位</span>
-          </div>
-        </div>
+      <!-- 公众号（唯一引流入口） -->
+      <div class="reveal" style="text-align:center;margin-bottom:1rem;">
+        <img src="images/qrcode_for_gh_e9c79db89bed_258.jpg" alt="公众号 supErChik" style="width:140px;height:140px;border:2px solid var(--border);border-radius:var(--radius-md);object-fit:cover;">
+        <p style="font-size:var(--sz-sm);font-weight:600;color:var(--text-hi);margin-top:0.5rem;">关注公众号 supErChik</p>
+        <p style="font-size:var(--sz-xs);color:var(--text-dim);margin-top:0.3rem;">所有产品动态、合作咨询，仅此一个入口</p>
       </div>
     </section>
-    </div>
 
     <footer class="footer">
       <div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:0.3rem;">
-        <a href="https://github.com/3432926599-cyber" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:none;font-family:var(--font-mono);font-size:var(--sz-xs);transition:color 0.2s;">GitHub</a>
-        <span style="color:var(--border);">·</span>
-        <a href="https://space.bilibili.com/" target="_blank" rel="noopener" style="color:var(--text-dim);text-decoration:none;font-family:var(--font-mono);font-size:var(--sz-xs);transition:color 0.2s;">B站</a>
-        <span style="color:var(--border);">·</span>
         <span style="color:var(--text-dim);font-family:var(--font-mono);font-size:var(--sz-xs);">公众号 supErChik</span>
       </div>
       <span style="font-size:var(--sz-xs);color:var(--text-dim);">© 2026 Chik.io · Build in Public</span>
@@ -2648,7 +2551,7 @@
         if (expanded) {
           toggle.classList.remove('expanded');
           story.classList.remove('expanded');
-          toggle.querySelector('.toggle-text').textContent = '看看这个人都折腾过什么 ↓';
+          toggle.querySelector('.toggle-text').textContent = '三个月，五个产品，从零到上线 ↓';
         } else {
           toggle.classList.add('expanded');
           story.classList.add('expanded');
